@@ -32,6 +32,11 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# bootstrap integration
+gem 'bootstrap', '~> 4.0.0.beta3'
+gem 'jquery-rails'
+
+# google omniauth integration
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 

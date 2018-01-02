@@ -12,25 +12,11 @@ div.signin-btn {
   text-align: center;
 }
 
-.btn {
-  color: #fff;
-  border-color: rgba(0,0,0,0.2);
-}
-
-.btn-gplus {
-  background-color: #4285f4;
-}
-
-.btn-github {
+a.btn-github {
   background-color: #444;
-}
-
-a:link, a:visited {
-  color: #fafafa;
-  opacity: 0.9;
-}
-
-a:hover, a:active {
   color: #fff;
-  opacity: 1.0;
+}
+
+a.btn-github:hover {
+  background-color: #000;
 }

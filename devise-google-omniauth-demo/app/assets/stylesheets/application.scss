@@ -1,10 +1,15 @@
 @import "bootstrap";
 
 .container {
-  padding-top: 8.0em;
+  padding-top: 4.0em;
 }
 
 /* devise styles */
+.row.authentication {
+  margin-bottom: 4.0em;
+  text-align: right;
+}
+
 .row .col-md-6.devise {
   margin: 0 auto;
 }

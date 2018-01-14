@@ -9,9 +9,12 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/messages' %>
 
     <div class="container">
+
+      <%= render partial: 'layouts/authentication' %>
+      <%= render partial: 'layouts/messages' %>
+
       <%= yield %>
     </div>
 

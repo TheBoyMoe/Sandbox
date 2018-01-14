@@ -4,11 +4,19 @@
     <title>DeviseGoogleOmniauthDemo</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="container">
+
+      <%= render partial: 'layouts/authentication' %>
+      <%= render partial: 'layouts/messages' %>
+
+      <%= yield %>
+    </div>
+
   </body>
 </html>

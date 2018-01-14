@@ -56,3 +56,12 @@ google-omniauth-demo/.byebug_history
 
 # Ignore application configuration
 google-omniauth-demo/config/application.yml
+
+
+### devise-google-omniauth-demo
+
+devise-google-omniauth-demo/tmp/*
+devise-google-omniauth-demo/log/*
+devise-google-omniauth-demo/.env
+devise-google-omniauth-demo/db/*.sqlite
+

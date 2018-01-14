@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# todo - does not test a sad path
+# https://gist.github.com/kinopyo/1338738
 RSpec.feature "user log in" do
 	scenario "using google oauth2" do
 		stub_omniauth

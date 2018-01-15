@@ -3,7 +3,7 @@
   <% if blog.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <a href="#" data-dismiss="alert" class="close">×</a>
-      <p><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</p>
+      <p><strong><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</strong></p>
       <ul>
       <% blog.errors.full_messages.each do |message| %>
         <li><%= message %></li>

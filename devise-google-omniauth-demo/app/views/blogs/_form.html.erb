@@ -1,13 +1,13 @@
 <%= form_with(model: blog, local: true) do |form| %>
   <% if blog.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+      <p class="alert alert-primary"><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</p>
 
-      <ul>
+      <div>
       <% blog.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <p class="alert alert-warning"><%= message %></p>
       <% end %>
-      </ul>
+      </div>
     </div>
   <% end %>
 

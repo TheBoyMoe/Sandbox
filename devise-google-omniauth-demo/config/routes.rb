@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 			sign_up: 'register' # 'users/sign_up' => 'register'
 	}
 
-	root to: "pages#index"
+	root to: "blogs#index"
 end

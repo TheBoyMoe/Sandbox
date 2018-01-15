@@ -1,7 +1,5 @@
 ## References
 
-### Google-Omniauth-demo
-
  [TDD Google Omniauth2 - Tutorial](http://www.jessespevack.com/blog/2016/10/16/how-to-test-drive-omniauth-google-oauth2-for-your-rails-app)
  [Tutorial Git Repo](https://github.com/PlanetEfficacy/google-omniauth-demo)
  [Google Auth in Rails](https://richonrails.com/articles/google-authentication-in-ruby-on-rails/)

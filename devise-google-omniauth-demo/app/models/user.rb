@@ -16,6 +16,8 @@ class User < ApplicationRecord
   # devise automatically requires email & password
   validates_presence_of :name
 
+  has_many :blogs
+
   def first_name
     self.name.split.first
   end

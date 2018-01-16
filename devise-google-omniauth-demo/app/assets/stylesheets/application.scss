@@ -34,3 +34,19 @@
   margin-bottom: 1.0em;
   border: 1px solid #007bff;
 }
+
+.alert-notice {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
+
+.alert-alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert ul {
+  margin-bottom: 0;
+}

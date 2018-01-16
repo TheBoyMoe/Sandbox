@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ## The :user role is added by default and shouldn't be included in this list.             ##
   ## The :root_admin can access any page regardless of access settings. Use with caution!   ##
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
-  petergate(roles: [:site_admin], multiple: false)                                          ##
+  petergate(roles: [:admin, :editor], multiple: false)                                               ##
   ############################################################################################ 
  
 
@@ -15,6 +15,16 @@ class User < ApplicationRecord
 
   # devise automatically requires email & password
   validates_presence_of :name
+
+  # delete the user, delete the blog
+  has_many :blogs, dependent: :destroy
+
+  # set default user role
+  after_create :set_role
+
+  def set_role
+    self.roles = 'editor'
+  end
 
   def first_name
     self.name.split.first

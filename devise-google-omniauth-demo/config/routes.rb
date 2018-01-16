@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :blogs
 	# customize sign_in, _up, _out routes
   devise_for :users, path: '', path_names: {
 			sign_in: 'login',   # 'users/sign_in' => 'login'
@@ -7,5 +8,5 @@ Rails.application.routes.draw do
 			sign_up: 'register' # 'users/sign_up' => 'register'
 	}
 
-	root to: "pages#index"
+	root to: "blogs#index"
 end

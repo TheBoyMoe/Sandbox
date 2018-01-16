@@ -4,6 +4,7 @@
 [TDD Google-Omnioauth Setup](http://www.jessespevack.com/blog/2016/10/16/how-to-test-drive-omniauth-google-oauth2-for-your-rails-app)
 [Authenticationg with Google](https://www.sitepoint.com/authenticating-google/)
 [Google Authentication in a Rails App](https://richonrails.com/articles/google-authentication-in-ruby-on-rails?comments_page=2)
+[Facebook authentication in a Rails app](https://richonrails.com/articles/facebook-authentication-in-ruby-on-rails)
 [Google-Omniauth-Oauth2 Gem Docs](https://github.com/zquestz/omniauth-google-oauth2)
 [Google-Gplus Omniauth gem docs](https://github.com/samdunne/omniauth-gplus)
 [Devise - setup](https://github.com/plataformatec/devise)
@@ -15,3 +16,4 @@
 [Petergate gem - docs](https://github.com/elorest/petergate)
 [Active Record callbacks - api](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
 [Active Record callbacks - docs](http://guides.rubyonrails.org/active_record_callbacks.html)
+w

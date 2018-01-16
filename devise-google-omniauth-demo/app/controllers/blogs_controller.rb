@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  # guest user can view and list blogs, logged in users can create, update and destroy blogs, admins can do everything
+  access all: [:index, :show], user: {except: [:new, :edit, :create, :update, :destroy]}, admin: :all
 
   # GET /blogs
   def index

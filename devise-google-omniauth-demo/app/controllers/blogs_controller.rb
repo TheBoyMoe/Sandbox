@@ -7,7 +7,7 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
   end
- 
+
   # GET /blogs/1
   def show
   end
@@ -19,6 +19,11 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    if @blog.user.id == current_user.id || logged_in?(:admin)
+      render :edit
+    else
+      redirect_to @blog, notice: 'Permission Denied'
+    end
   end
 
   # POST /blogs
@@ -33,17 +38,25 @@ class BlogsController < ApplicationController
 
   # PATCH/PUT /blogs/1
   def update
-    if @blog.update(blog_params)
-      redirect_to @blog, notice: 'Blog was successfully updated.'
+    if @blog.user.id == current_user.id || logged_in?(:admin)
+      if @blog.update(blog_params)
+        redirect_to @blog, notice: 'Blog was successfully updated.'
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to @blog, notice: 'Permission Denied'
     end
   end
 
   # DELETE /blogs/1
   def destroy
-    @blog.destroy
-    redirect_to blogs_url, notice: 'Blog was successfully destroyed.'
+    if @blog.user.id == current_user.id || logged_in?(:admin)
+      @blog.destroy
+      redirect_to blogs_url, notice: 'Blog was successfully destroyed.'
+    else
+      redirect_to blogs_path, notice: 'Permission Denied'
+    end
   end
 
   private

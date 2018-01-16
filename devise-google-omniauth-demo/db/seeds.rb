@@ -9,7 +9,8 @@ User.create!(
 		name: 'User',
 		email: 'user@example.com',
 		password: 'password',
-		password_confirmation: 'password'
+		password_confirmation: 'password',
+		roles: 'editor'
 )
 
 User.create!(

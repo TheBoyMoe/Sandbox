@@ -13,3 +13,5 @@
 [Devise - integrating Bootstrap with error messages](https://github.com/plataformatec/devise/wiki/How-To:-Integrate-I18n-Flash-Messages-with-Devise-and-Bootstrap)
 [Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
 [Petergate gem - docs](https://github.com/elorest/petergate)
+[Active Record callbacks - api](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
+[Active Record callbacks - docs](http://guides.rubyonrails.org/active_record_callbacks.html)

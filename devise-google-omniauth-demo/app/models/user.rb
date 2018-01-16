@@ -19,6 +19,13 @@ class User < ApplicationRecord
   # delete the user, delete the blog
   has_many :blogs, dependent: :destroy
 
+  # set default user role
+  after_create :set_role
+
+  def set_role
+    self.roles = 'editor'
+  end
+
   def first_name
     self.name.split.first
   end

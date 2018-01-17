@@ -14,6 +14,7 @@
 [Petergate gem - docs](https://github.com/elorest/petergate)
 [Active Record callbacks - api](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
 [Active Record callbacks - docs](http://guides.rubyonrails.org/active_record_callbacks.html)
+[Error handling in Rails](https://medium.com/rails-ember-beyond/error-handling-in-rails-the-modular-way-9afcddd2fe1b)
 
 ### Specific
 [Google-Omniauth-Oauth2 Gem Docs](https://github.com/zquestz/omniauth-google-oauth2)

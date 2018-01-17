@@ -2,14 +2,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 	def google
 		@user = User.from_omniauth(request.env["omniauth.auth"])
-		byebug
-
-		if @user.persisted?
-			sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
-			set_flash_message(:notice, :success, kind: "Signed in with Google") if is_navigational_format?
+		if !@user
+			flash[:alert] = "Email account is already in use"
+			redirect_to new_user_session_path
 		else
-			session["devise.google_data"] = request.env["omniauth.auth"]
-			redirect_to new_user_registration_url
+			if @user.persisted?
+				sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
+				set_flash_message(:notice, :success, kind: "Signed in with Google") if is_navigational_format?
+			else
+				session["devise.google_data"] = request.env["omniauth.auth"]
+				redirect_to new_user_registration_url
+			end
 		end
 	end
 

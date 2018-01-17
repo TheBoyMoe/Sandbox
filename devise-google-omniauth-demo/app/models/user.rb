@@ -28,11 +28,17 @@ class User < ApplicationRecord
 
   # generate user based on omniauth data received from google
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-      # user.image = auth.info.image # assuming the user model has an image
+    # todo - dirty hack!
+    user = User.find_by_email(auth.info.email.downcase)
+    if user
+      nil
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name
+        # user.image = auth.info.image # assuming the user model has an image
+      end
     end
   end
 

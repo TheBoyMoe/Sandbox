@@ -20,4 +20,4 @@
 [Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
 [Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
 [Devise - config default signin, signout routes](https://github.com/plataformatec/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes)
-
+0

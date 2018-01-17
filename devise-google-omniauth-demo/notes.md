@@ -16,4 +16,3 @@
 [Petergate gem - docs](https://github.com/elorest/petergate)
 [Active Record callbacks - api](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
 [Active Record callbacks - docs](http://guides.rubyonrails.org/active_record_callbacks.html)
-w

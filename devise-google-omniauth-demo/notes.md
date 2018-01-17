@@ -19,3 +19,5 @@
 [Google-Omniauth-Oauth2 Gem Docs](https://github.com/zquestz/omniauth-google-oauth2)
 [Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
 [Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
+[Devise - config default signin, signout routes](https://github.com/plataformatec/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes)
+

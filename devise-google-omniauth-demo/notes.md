@@ -1,18 +1,21 @@
 ## References
 
+### General
 [Bootstrap 4 Docs](https://github.com/twbs/bootstrap-rubygem)
 [TDD Google-Omnioauth Setup](http://www.jessespevack.com/blog/2016/10/16/how-to-test-drive-omniauth-google-oauth2-for-your-rails-app)
 [Authenticationg with Google](https://www.sitepoint.com/authenticating-google/)
 [Google Authentication in a Rails App](https://richonrails.com/articles/google-authentication-in-ruby-on-rails?comments_page=2)
 [Facebook authentication in a Rails app](https://richonrails.com/articles/facebook-authentication-in-ruby-on-rails)
-[Google-Omniauth-Oauth2 Gem Docs](https://github.com/zquestz/omniauth-google-oauth2)
 [Google-Gplus Omniauth gem docs](https://github.com/samdunne/omniauth-gplus)
 [Devise - setup](https://github.com/plataformatec/devise)
-[Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
 [Devise - Testing with cucumber](https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Cucumber)
 [Devise - testing with capybara](https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara)
 [Devise - integrating Bootstrap with error messages](https://github.com/plataformatec/devise/wiki/How-To:-Integrate-I18n-Flash-Messages-with-Devise-and-Bootstrap)
-[Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
 [Petergate gem - docs](https://github.com/elorest/petergate)
 [Active Record callbacks - api](http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html)
 [Active Record callbacks - docs](http://guides.rubyonrails.org/active_record_callbacks.html)
+
+### Specific
+[Google-Omniauth-Oauth2 Gem Docs](https://github.com/zquestz/omniauth-google-oauth2)
+[Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
+[Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)

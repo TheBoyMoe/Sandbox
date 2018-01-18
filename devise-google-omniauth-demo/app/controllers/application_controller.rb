@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
 
   # call application concerns
   include DeviseWhitelist
-  include CurrentUserConcern
+  # include CurrentUserConcern # implements custom current_user
 end

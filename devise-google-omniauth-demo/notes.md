@@ -21,4 +21,6 @@
 [Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
 [Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
 [Devise - config default signin, signout routes](https://github.com/plataformatec/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes)
-0
+[Social Login(Google/Facebook/Github) with ROR](https://scotch.io/tutorials/integrating-social-login-in-a-ruby-on-rails-application)
+[Social Login with RoR Github Repo](https://github.com/nomanurrehman/Devise-Omniauth)
+[Omniauth-Github repo](https://github.com/omniauth/omniauth-github)

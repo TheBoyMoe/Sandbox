@@ -82,3 +82,7 @@ div {
 label {
   display: block;
 }
+
+a[href^="/auth/github"] {
+  background: #000;
+}

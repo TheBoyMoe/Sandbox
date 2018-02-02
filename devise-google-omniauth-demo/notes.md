@@ -21,4 +21,10 @@
 [Devise - Omniauth setup](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
 [Omniauth Integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
 [Devise - config default signin, signout routes](https://github.com/plataformatec/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes)
-0
+[Social Login(Google/Facebook/Github) with ROR](https://scotch.io/tutorials/integrating-social-login-in-a-ruby-on-rails-application)
+[Social Login with RoR Github Repo](https://github.com/nomanurrehman/Devise-Omniauth)
+[Omniauth-Github repo](https://github.com/omniauth/omniauth-github)
+[Devise, Facebook and Omniauth on Rails](http://tgib23.github.io/blog/2016/11/10/how-to-use-omniauth-plus-devise-on-rails5/)
+[Add Twitter to the mix](http://tgib23.github.io/blog/2017/01/09/add-twitter-login-with-omniauth-plus-devise-on-rails5/)
+[Add Google and Instagram](http://tgib23.github.io/blog/2017/11/12/add-google-plus-and-instagram-login-with-omniauth-plus-devise-on-rails5/)
+[Github Repo for the 3 previous blog posts](https://github.com/tgib23/douzou_chan2)

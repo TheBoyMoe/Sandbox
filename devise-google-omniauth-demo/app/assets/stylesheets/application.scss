@@ -55,3 +55,13 @@
   padding-top: 0.7em;
   padding-bottom: 0.7em;
 }
+
+.devise a.btn.btn-primary.btn-block.github {
+  background-color: #222;
+  border-color: #222;
+}
+
+.devise a.btn.btn-primary.btn-block.github:hover {
+  background-color: #000;
+  border-color: #000;
+}

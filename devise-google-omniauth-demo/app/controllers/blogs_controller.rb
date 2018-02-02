@@ -1,7 +1,9 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  # guest user can view and list blogs, logged in users can create, update and destroy blogs, admins can do everything
-  access [:all, :user] => [:index, :show], [:editor, :admin] => [:index, :show, :new, :create, :edit, :update, :destroy]
+  # guest user can view and list blogs, logged in users can create,
+  # update and destroy blogs, admins can do everything
+  access [:all, :user] => [:index, :show], [:editor, :admin] =>
+      [:index, :show, :new, :create, :edit, :update, :destroy]
 
 	# require that users sign in before viewing blog
   # before_action :authenticate_user!

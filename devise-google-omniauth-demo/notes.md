@@ -28,3 +28,12 @@
 [Add Twitter to the mix](http://tgib23.github.io/blog/2017/01/09/add-twitter-login-with-omniauth-plus-devise-on-rails5/)
 [Add Google and Instagram](http://tgib23.github.io/blog/2017/11/12/add-google-plus-and-instagram-login-with-omniauth-plus-devise-on-rails5/)
 [Github Repo for the 3 previous blog posts](https://github.com/tgib23/douzou_chan2)
+[Devise auth via omniauth with multiple providers](http://quickrails.com/login-with-multiple-providers-devise-via-omniauth/)
+[Send an email notification](http://quickrails.com/send-confirmation-email/)
+[Send welcome email](https://www.theodinproject.com/courses/ruby-on-rails/lessons/sending-confirmation-emails)
+[Sending a configrmation email](http://beatscodeandlife.ghost.io/email-confirmation-in-rails/)*
+[User Signup confirmation email](https://coderwall.com/p/u56rra/ruby-on-rails-user-signup-email-confirmation-tutorial)
+[Send confirmation email using devise](http://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Authentication_Sending_Confirmation_Email.php)
+[Action Mailer Basics](http://guides.rubyonrails.org/action_mailer_basics.html)
+[Enable email confirmation via Devise](https://github.com/plataformatec/devise/wiki/How-To:-Add-:confirmable-to-Users)*
+[Setup Email confirmation using Devise](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)*

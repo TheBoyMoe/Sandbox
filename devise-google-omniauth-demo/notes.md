@@ -36,4 +36,4 @@
 [Send confirmation email using devise](http://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Authentication_Sending_Confirmation_Email.php)
 [Action Mailer Basics](http://guides.rubyonrails.org/action_mailer_basics.html)
 [Enable email confirmation via Devise](https://github.com/plataformatec/devise/wiki/How-To:-Add-:confirmable-to-Users)*
-[Setup Email confirmation using Devise](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)*
+[Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)*

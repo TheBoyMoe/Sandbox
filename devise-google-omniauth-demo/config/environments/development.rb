@@ -52,6 +52,15 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-	# devise setting
+	# to setup mailcatcher
+	# 1. `gem install mailcatcher`
+	# 2. `mailcatcher`
+	# 3. Go to http://127.0.0.1:1080/
+	# 4. Send mail through smtp://127.0.0.1:1025
+
+	# devise mailer settings - using 'mailcatcher'
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {address: 'localhost', port: 1025}
+	config.action_mailer.raise_delivery_errors = false
 end

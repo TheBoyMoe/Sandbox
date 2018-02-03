@@ -14,9 +14,9 @@ Users who register vis the signup page will be sent a confirmation email, upon c
 
 ## Article references
 
-[Authentication using Devise](https://rails.devcamp.com/trails/dissecting-rails-5/campsites/rails-5-authentication)
-[Authorisation using Petergate](https://rails.devcamp.com/dissecting-rails-5/implementing-authorization-rails/guide-implementing-petergate-rails-5-application)
-[Enable email confirmation via Devise](https://github.com/plataformatec/devise/wiki/How-To:-Add-:confirmable-to-Users)
-[Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)
-[Devise docs on setting up omniauth strategy using Facebook](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)
-[Setting up multiple providers using omniauth and Devise](httpgsts://scotch.io/tutorials/integrating-social-login-in-a-ruby-on-rails-application)
+[Authentication using Devise](https://rails.devcamp.com/trails/dissecting-rails-5/campsites/rails-5-authentication)  
+[Authorisation using Petergate](https://rails.devcamp.com/dissecting-rails-5/implementing-authorization-rails/guide-implementing-petergate-rails-5-application)  
+[Enable email confirmation via Devise](https://github.com/plataformatec/devise/wiki/How-To:-Add-:confirmable-to-Users)  
+[Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)  
+[Devise docs on setting up omniauth strategy using Facebook](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview)  
+[Setting up multiple providers using omniauth and Devise](httpgsts://scotch.io/tutorials/integrating-social-login-in-a-ruby-on-rails-application)  

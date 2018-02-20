@@ -27,7 +27,7 @@ end
 ```
 
 
-## Devise Setup 
+## Devise Setup with Email confirmation
 
 1. Add the following gems to your Gemfile
 

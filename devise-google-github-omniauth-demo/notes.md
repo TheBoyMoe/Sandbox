@@ -37,3 +37,11 @@
 [Action Mailer Basics](http://guides.rubyonrails.org/action_mailer_basics.html)
 [Enable email confirmation via Devise](https://github.com/plataformatec/devise/wiki/How-To:-Add-:confirmable-to-Users)*
 [Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)*
+
+## Omniauth gem and strategies
+
+[omniauth gem](https://github.com/omniauth/omniauth)  
+[list of strategies](https://github.com/omniauth/omniauth/wiki/List-of-Strategies)  
+[Github strategy](https://github.com/omniauth/omniauth-github)  
+[Google Omniauth2 strategy](https://github.com/zquestz/omniauth-google-oauth2)  
+[GPlus strategy](https://github.com/samdunne/omniauth-gplus)  

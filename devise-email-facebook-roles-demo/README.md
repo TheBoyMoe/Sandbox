@@ -34,8 +34,6 @@ end
 ```ruby
 gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
-gem 'omniauth', '~> 1.8', '>= 1.8.1'
-gem 'omniauth-facebook', '~> 4.0'
 ```
 
 2. Run the devise install generator
@@ -364,11 +362,128 @@ GMAIL_PASSWORD=xxxxxxxxxxx
 
 ## Facebook Authentication Setup
 
-1. add the omniauth gems to the Gemfile
+1. Sdd the omniauth gems to the Gemfile
 
 ```ruby
-
+gem 'omniauth', '~> 1.8', '>= 1.8.1'
+gem 'omniauth-facebook', '~> 4.0'
 ```
+
+2. We need to add two columns to our Users table, `provider` which will be either facebook or nil and `uid` to store the user's id as provided by Facebook upon successful authentication - both string data type, and run the migration. Using the datatype as `index`, sets the column's datatype to `string` and adds an index for the column.
+
+
+```text
+bundle exec rails g migration AddOmniauthToUsers provider:index uid:index
+```
+
+
+3. Create an app in the [Facebook Developer Console](https://developers.facebook.com/apps), make a note of the:
+- App Key(App ID)
+- App Secret
+- and set the callback url to `http://localhost:3000/users/auth/facebook/callback`, check 'Facebook Login' > 'Settings'
+
+
+
+4. Update `.env` file with the app's settings
+
+```text
+ENV["FACEBOOK_KEY"]=xxxxxxxxxxxxxxxxxxx
+ENV["FACEBOOK_SECRET"]=xxxxxxxxxxxxxxxxxxx
+```
+
+
+5. Declare the provider in `config/initializers/devise.rb` - scope gives us access to the user's email and name
+
+```ruby
+config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"], scope: 'name,email'
+```
+
+6. Enable Devise's omniauthible module and declaer the provider in the user model
+
+```ruby
+# app/models/user.rb
+devise :omniauthable, omniauth_providers: %i[facebook]
+```
+
+
+7. Define the callback route(`omniauth_callbacks: 'users/omniauth_callbacks'`) Facebook will use to return the user's data upon successful authentication. The `config/routes.rb` file will look like so
+
+
+```ruby
+# config/routes.rb - devise section
+devise_for :users, path: '', path_names: {
+		sign_in: 'login',   # 'users/sign_in' => 'login'
+		sign_out: 'logout', # 'users/sign_out' => 'logout'
+		sign_up: 'register' # 'users/sign_up' => 'register'
+},
+controllers: {
+		registrations: 'registrations',
+		omniauth_callbacks: 'users/omniauth_callbacks'
+}
+
+# ...... more
+```
+
+Devise will create GET and POST routes for each of the following paths:
+- user_facebook_omniauth_authorize_path, and
+- user_facebook_omniauth_callback_path
+
+
+NOTE: Devise does NOT create _url routes, and you only need to use `user_facebook_omniauth_authorize_path` in your layouts. 
+
+
+```html
+<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+```
+
+Clicking on the link redirects the user to Facebook. After successful authentication the user will be redirected back to your app's callback method - requires creating a controller and action.
+
+
+8. Define a controller which extends `Devise::OmniauthCallbacksController` and implements the callback as an action with the same name as the provider.
+
+
+```ruby
+# app/controllers/users/omniauth_callbacks_controller.rb
+class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+
+	def facebook
+  		@user = User.from_omniauth(request.env["omniauth.auth"])
+  		if @user.persisted?
+  			sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
+  			set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+  		else
+  			session["devise.facebook_data"] = request.env["omniauth.auth"]
+  			redirect_to new_user_registration_url
+  		end
+  	end
+  
+  	def failure
+  		redirect_to root_path, alert: "Authentication through Facebook failed"
+  	end
+end
+```
+
+Note:
+- All information retrieved from Facebook by OmniAuth is available as a hash at request.env["omniauth.auth"]
+-When a valid user is found, they can be signed in with one of two Devise methods: sign_in or sign_in_and_redirect.
+- When the user cannot be found in the database and a new one could not be created, we store the OmniAuth data in the session and redirect the user back to the registration form.
+
+
+9. Define the `User.from_omniauth` method - find an existing user by the provider and uid fields. If no user is found, a new one is created with a random password.
+
+
+```ruby
+# app/models/user.rb
+def self.from_omniauth(auth)
+	where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+		user.email = auth.info.email
+		user.password = Devise.friendly_token[0,20]
+		user.name = auth.info.name
+		user.skip_confirmation!
+	end
+end 
+```
+
 
 
 
@@ -383,9 +498,10 @@ Email configuration:
 [Configure Devise to send a confirmation email](https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)  
 [Custom Mailer](https://github.com/plataformatec/devise/wiki/How-To:-Use-custom-mailer)  
 [Rails ActionMailer Basics](http://guides.rubyonrails.org/action_mailer_basics.html)  
-[Sending emails using ActionMailer and Gmail](https://launchschool.com/blog/handling-emails-in-rails)  
+[Sending emails using ActionMailer and Gmail](https://launchschool.com/blog/handling-emails-in-rails)    
 [Setup mailcatcher gem to capture emails](https://stackoverflow.com/questions/8186584/how-do-i-set-up-email-confirmation-with-devise)  
 
 
 Facebook Configuration  
-
+[Facebook setup with Devise](https://github.com/plataformatec/devise/wiki/omniauth:-overview)  
+[Facebook Omniauth Settings](https://github.com/mkdynamic/omniauth-facebook)  

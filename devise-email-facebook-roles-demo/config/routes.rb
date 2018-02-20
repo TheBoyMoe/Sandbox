@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 			sign_out: 'logout', # 'users/sign_out' => 'logout'
 			sign_up: 'register' # 'users/sign_up' => 'register'
 	},
-	controllers: { registrations: 'registrations' }
+	controllers: {
+			registrations: 'registrations',
+			omniauth_callbacks: 'users/omniauth_callbacks'
+	}
 
 	root to: 'static#home'
 

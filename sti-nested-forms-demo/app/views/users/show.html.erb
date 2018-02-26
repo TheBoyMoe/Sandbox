@@ -1,7 +1,7 @@
 <h1><%= @user.name %></h1>
 
 <h3>Contact</h3>
-<p><%= @user.email %> | <%= @user.type %></p>
+<p><%= @user.email %> | <%= @user.type %> | <%= link_to "All #{@user.type.pluralize}", sti_user_path(@user.type) %></p>
 
 <h3>Bio</h3>
 <p><%= @user.bio %></p>

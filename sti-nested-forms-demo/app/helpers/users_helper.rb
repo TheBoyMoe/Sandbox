@@ -5,7 +5,8 @@ module UsersHelper
 	end
 
 	def format_sti(action, type, user)
-		(action || user)? "#{format_action(action)}#{type.underscore}" : "#{type.underscore.pluralize}"
+		(action || user)? "#{format_action(action)}#{type.underscore}" :
+				"#{type.underscore.pluralize}"
 	end
 
 	def format_action(action)

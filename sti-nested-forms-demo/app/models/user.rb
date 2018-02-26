@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-	has_many :user_social_links
+	has_many :user_social_links, dependent: :destroy
 	has_many :social_links, through: :user_social_links
+	accepts_nested_attributes_for :social_links
+
+	validates_presence_of :name, :email, :type
 
 	# models which subclass user
 	def self.types

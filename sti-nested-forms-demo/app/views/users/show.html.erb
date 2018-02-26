@@ -6,5 +6,12 @@
 <h3>Bio</h3>
 <p><%= @user.bio %></p>
 
-<br>
+<h3>Social Links</h3>
+<% if @social_links && @social_links.count > 0 %>
+	<% @social_links.each do |social_link| %>
+		<%= link_to social_link.name, social_link.url, target: "_blank" %>&nbsp;
+	<% end %>
+<% end %>
+
+<br><br>
 <%= link_to 'Back',  sti_user_path(@user.type) %>

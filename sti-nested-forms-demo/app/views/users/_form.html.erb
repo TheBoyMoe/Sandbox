@@ -11,28 +11,39 @@
 		</div>
 	<% end %>
 
+	<h3>User Information</h3>
 	<div class="field">
-		<%= f.label :name %><br>
+		<%= f.label :name %>
 		<%= f.text_field :name %>
 	</div><br>
 
 	<div class="field">
-		<%= f.label :type %><br>
-		<%= f.select :type, User.types.map {|r| [r.humanize, r.camelcase]}, {}, disabled: type != "User" %>
-		<% if type != "User" %>
-			<%= f.hidden_field :type, value: type %>
-		<% end %>
+		<%= f.label :email %>
+		<%= f.text_field :email %>
 	</div><br>
 
 	<div class="field">
-		<%= f.label :email %><br>
-		<%= f.text_field :email %>
+		<%= f.label :type, "Account type" %>
+		<%= f.select :type, User.types.map {|r| [r.humanize, r.camelcase]}, {}, disabled: type != "User" %>
+		<% if type != "User" %>
+			<%= f.hidden_field :type, value: type %>
+	<% end %>
 	</div><br>
 
 	<div class="field">
 		<%= f.label :bio %><br>
 		<%= f.text_area :bio %>
 	</div><br>
+
+	<h3>Social Links</h3>
+	<%= f.fields_for :social_links do |social_link| %>
+		<%= social_link.label :name %>
+		<%= social_link.text_field :name %>
+
+		<%= social_link.label :url %>
+		<%= social_link.text_field :url %>
+		<br><br>
+	<% end %>
 
 	<div class="actions">
 		<%= f.submit %>

@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   end
 
   def show
+		@social_links = @user.social_links
   end
 
   def new
 		@user = type_class.new
+		@user.social_links.build(name: 'Github')
+		@user.social_links.build(name: 'Twitter')
   end
 
   def create
@@ -58,6 +61,16 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(check_type.underscore.to_sym).permit(:name, :email, :bio, :image, :type)
+			params.require(check_type.underscore.to_sym).permit(
+					:name,
+					:email,
+					:bio,
+					:image,
+					:type,
+					social_links_attributes: [
+						:name,
+						:url
+					]
+			)
 		end
 end

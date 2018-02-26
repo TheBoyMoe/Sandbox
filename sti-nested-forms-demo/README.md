@@ -1,24 +1,10 @@
-# README
+## Single Table Inheritance with Nested Form Demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+### References
+[Single Table Inheritance in Rails part 1](https://devblast.com/b/single-table-inheritance-with-rails-4-part-1/)  
+[STI part 2](https://devblast.com/b/single-table-inheritance-with-rails-4-part-2/)  
+[STI article repo](https://github.com/T-Dnzt/sti-with-rails4)  
+[Faker gem](https://github.com/stympy/faker)  
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

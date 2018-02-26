@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_type
 
   def index
@@ -36,5 +37,9 @@ class UsersController < ApplicationController
 
     def type_class
       check_type.constantize
-    end
+		end
+
+		def set_user
+			@user = type_class.find(params[:id])
+		end
 end

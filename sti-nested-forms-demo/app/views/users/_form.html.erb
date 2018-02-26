@@ -12,38 +12,41 @@
 	<% end %>
 
 	<h3>User Information</h3>
-	<div class="field">
-		<%= f.label :name %>
+	<div class="field control-group">
+		<%= f.label :name, class: 'control-label' %>
 		<%= f.text_field :name %>
 	</div><br>
 
-	<div class="field">
-		<%= f.label :email %>
+	<div class="field control-group">
+		<%= f.label :email,class: 'control-label' %>
 		<%= f.text_field :email %>
 	</div><br>
 
-	<div class="field">
-		<%= f.label :type, "Account type" %>
+	<div class="field control-group">
+		<%= f.label :type, "Account type", class: 'control-label' %>
 		<%= f.select :type, User.types.map {|r| [r.humanize, r.camelcase]}, {}, disabled: type != "User" %>
 		<% if type != "User" %>
 			<%= f.hidden_field :type, value: type %>
 	<% end %>
 	</div><br>
 
-	<div class="field">
-		<%= f.label :bio %><br>
+	<div class="field control-group">
+		<%= f.label :bio, class: 'control-label' %><br>
 		<%= f.text_area :bio %>
 	</div><br>
 
 	<h3>Social Links</h3>
-	<%= f.fields_for :social_links do |social_link| %>
-		<%= social_link.label :name %>
-		<%= social_link.text_field :name %>
+	<div class="field control-group">
+		<%= f.fields_for :social_links do |social_link| %>
+			<span>Social</span>
+			<%= social_link.select(:name, options_for_select(
+					[['Facebook', 'Facebook'], ['Github', 'Github'], ['Twitter', 'Twitter']]), {include_blank: true }) %>
 
-		<%= social_link.label :url %>
-		<%= social_link.text_field :url %>
-		<br><br>
-	<% end %>
+			<%= social_link.label :url, class: 'control-label' %>
+			<%= social_link.text_field :url %>
+			<br><br>
+		<% end %>
+	</div>
 
 	<div class="actions">
 		<%= f.submit %>

@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
   def new
 		@user = type_class.new
-		@user.social_links.build(name: 'Github')
-		@user.social_links.build(name: 'Twitter')
+		@user.social_links.build
+		# @user.social_links.build(name: 'Twitter')
   end
 
   def create

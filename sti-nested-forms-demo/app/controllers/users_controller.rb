@@ -10,9 +10,16 @@ class UsersController < ApplicationController
   end
 
   def new
+		@user = type_class.new
   end
 
   def create
+		@user = User.new(user_params)
+		if @user.save
+			redirect_to @user, notice: "#{check_type} was successfully created"
+		else
+			render action: 'new'
+		end
   end
 
   def edit
@@ -41,5 +48,9 @@ class UsersController < ApplicationController
 
 		def set_user
 			@user = type_class.find(params[:id])
+		end
+
+		def user_params
+			params.require(check_type.underscore.to_sym).permit(:name, :email, :bio, :image, :type)
 		end
 end

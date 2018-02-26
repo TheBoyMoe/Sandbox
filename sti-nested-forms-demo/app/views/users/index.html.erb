@@ -7,7 +7,7 @@
 				<%= user.email %> |
 				<%= user.type %> |
 				<%= link_to 'Show',  sti_user_path(user.type, user) %>
-				<%= link_to 'Edit', user_path(user), method: 'patch' %>
+				<%= link_to 'Edit', sti_user_path(user.type, user, 'edit') %>
 				<%= link_to 'Destroy', user_path(user), method: 'delete', data: {confirm: 'Are you sure?'} %>
 			</p>
 			<p><%= user.bio %></p>

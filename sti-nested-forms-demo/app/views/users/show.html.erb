@@ -5,3 +5,6 @@
 
 <h3>Bio</h3>
 <p><%= @user.bio %></p>
+
+<br>
+<%= link_to 'Back',  sti_user_path(@user.type) %>

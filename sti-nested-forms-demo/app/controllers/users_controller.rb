@@ -26,6 +26,11 @@ class UsersController < ApplicationController
   end
 
   def update
+		if @user.update(user_params)
+			redirect_to @user, notice: "#{check_type} was successfully updated"
+		else
+			render action: 'edit'
+		end
   end
 
   def destroy

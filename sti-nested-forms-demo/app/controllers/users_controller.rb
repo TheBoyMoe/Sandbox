@@ -12,12 +12,11 @@ class UsersController < ApplicationController
 
   def new
 		@user = type_class.new
-		3.times {@user.social_links.build}
+		2.times{@user.social_links.build}
 		# @user.social_links.build(name: 'Twitter') # hard code the the social_link name
   end
 
   def create
-		byebug
 		@user = User.new(user_params)
 		if @user.save
 			redirect_to @user, notice: "#{check_type} was successfully created"

@@ -18,13 +18,6 @@
 
 $(document).on('turbolinks:load', function() {
 
-	// $('form').on('click', '.remove_fields', function(e) {
-	// 	// setting val to 1 sets _destroy to true(0 == false)
-	// 	$(this).prev('input[type=hidden]').val('1');
-	// 	$(this).closest('fieldset').hide();
-	// 	return e.preventDefault();
-	// });
-
 	$('form').on('click', '.add_fields', function(e) {
 		var regexp, time;
 		time = new Date().getTime(); // get current time

@@ -9,5 +9,6 @@
 [STI article repo](https://github.com/T-Dnzt/sti-with-rails4)  
 [Faker gem](https://github.com/stympy/faker)  
 [Include a Drop down Element on a Rails Form](https://www.youtube.com/watch?v=FWIXWutlxIg)  
+[Dynamically build drop down menu with database call](https://www.youtube.com/watch?v=rf6B9oo1zPY)  
 
 

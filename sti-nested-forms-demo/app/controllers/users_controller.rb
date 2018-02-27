@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def new
 		@user = type_class.new
-		2.times{@user.social_links.build}
+		@user.social_links.build
 		# @user.social_links.build(name: 'Twitter') # hard code the the social_link name
   end
 
@@ -37,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-		# todo destroy UserSocialLink and all SocialLink objects
 		@user.destroy
 		redirect_to users_path, notice: 'User successfully deleted'
   end

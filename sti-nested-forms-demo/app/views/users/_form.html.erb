@@ -57,34 +57,25 @@
 
 	<h3>Social Links</h3>
 	<div class="field">
-		<%= f.fields_for :social_links do |social_link| %>
+		<%= f.fields_for :social_links do |builder| %>
 
 			<div class="control-group">
-				<span>Social</span>
+
 				<!--hard coded social link names-->
 				<%#= social_link.select(:name, options_for_select(
 					[['Facebook', 'Facebook'], ['Github', 'Github'], ['Twitter', 'Twitter']]), {include_blank: true }) %>
 
-				<span class="controls">
-					<!--dynamically fetch social media names from database-->
-					<%= social_link.collection_select(:name, SocialLink.all.group(:name),:name, :name, {}, {multiple: false}) %>
-				</span>
+					<%= render partial: 'social_link_field', locals: {f: builder} %>
 
-				<span class="control-group">
-					<%= social_link.label :url, class: 'control-label' %>
-					<span class="controls">
-						<%= social_link.text_field :url %>
-					</span>
-				</span>
-			</div>
+					<!--allow the user to add more social links-->
+					<%= add_social_link_field 'Add Link', f, :social_links %>
+			</div><br>
 
-
-
-			<br><br>
 		<% end %>
 	</div>
 
 	<div class="actions">
 		<%= f.submit %>
 	</div>
+
 <% end %>

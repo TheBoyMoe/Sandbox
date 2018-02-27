@@ -19,3 +19,12 @@ end
 		type: 'Founder'
 	)
 end
+
+social_links = %w[Facebook Twitter Github Google-Plus Linkedin]
+i = 0
+5.times do
+	SocialLink.create!(
+		name: social_links[i]
+	)
+	i += 1
+end

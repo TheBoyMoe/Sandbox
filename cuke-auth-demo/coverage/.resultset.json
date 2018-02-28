@@ -1,0 +1,25 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "/home/theboymo/WORK/WEBDEV/SANDBOX/cuke-auth-demo/app/models/application_record.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/SANDBOX/cuke-auth-demo/app/controllers/application_controller.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/SANDBOX/cuke-auth-demo/app/helpers/application_helper.rb": [
+        0,
+        0
+      ],
+      "/home/theboymo/WORK/WEBDEV/SANDBOX/cuke-auth-demo/app/jobs/application_job.rb": [
+        0,
+        0
+      ]
+    },
+    "timestamp": 1519824293
+  }
+}

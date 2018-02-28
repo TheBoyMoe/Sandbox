@@ -404,3 +404,216 @@ end
 And(/^the window size is wide$/) do
 	Capybara.page.current_window.resize_to(1300,400)
 end
+
+When /^I search for "(.*?)"$/ do |text|
+	fill_in 'q', with: text
+	click_button 'Submit'
+end
+
+
+Then(/^I should see "([^"]*)" page before "([^"]*)"$/) do |first_item, second_item|
+	page.body.should =~ /#{first_item}.*#{second_item}/m
+end
+
+
+Then /^the organisation results should( not)? contain:$/ do |negative, table|
+	expectation = negative ? :should_not : :should
+	table.raw.flatten.each do |cell|
+		within('#orgs_scroll') do
+			page.send(expectation, have_text(cell))
+		end
+	end
+end
+
+
+Then /^I should( not)? see:$/ do |negative, table|
+	expectation = negative ? :should_not : :should
+	table.rows.flatten.each do |string|
+		page.send(expectation, have_text(string))
+	end
+end
+
+Then /^the index should( not)? contain:$/ do |negative, table|
+	expectation = negative ? :should_not : :should
+	table.raw.flatten.each do |cell|
+		within('#column2') do
+			page.send(expectation, have_text(cell))
+		end
+	end
+end
+
+Then(/^I should see "(.*?)" < (.*?) >$/) do |text, tag|
+	tags = {'emphasized' => 'em', 'stronged' => 'strong', 'number listed' => 'ol', 'bullet listed' => 'ul'}
+	collect_tag_contents(page.body, tags[tag]).should include(text)
+end
+
+Then(/^I should see "(.*?)" < tagged > with "(.*?)"$/) do |text, tag|
+	page.should have_css(tag, text: text)
+	#collect_tag_contents(page.body, tag).should include(text)
+end
+
+Then(/^I should see "(.*?)" < linked > to "(.*?)"$/) do |text, url|
+	links = collect_links(page.body)
+	links[text].should == url
+end
+
+Then(/^I should see a mail-link to "([^"]*)"$/) do |email|
+	page.should have_css("a[href='mailto:#{email}']")
+end
+
+
+When(/^the URL should contain "(.*?)"$/) do |string|
+	URI.parse(current_url).path.should == '/' + string
+end
+
+
+
+When /^I fill in "(.*?)" with "(.*?)" within the navbar$/ do |field, value|
+	within('#navbar') { fill_in(field, with: value) }
+end
+
+When /^I fill in "(.*?)" with "(.*?)" within the main body$/ do |field, value|
+	within('#main') { fill_in(field, with: value) }
+end
+
+Given /^I create "(.*?)" org$/ do |name|
+	page.driver.submit :post, '/organisations', organisation: {name: name}
+end
+
+Then /^"(.*?)" org should not exist$/ do |name|
+	expect(Organisation.find_by_name name).to be_nil
+end
+
+Then(/^"(.*?)" should have email "(.*?)"$/) do |org, email|
+	Organisation.find_by_name(org).email.should eq email
+end
+
+
+Then(/^I should( not)? see a link or button "(.*?)"$/) do |negate, link|
+	expectation_method = negate ? :not_to : :to
+	expect(page).send(expectation_method, have_selector(:link_or_button, link))
+end
+
+Then(/^the navbar should( not)? have a link to (.*?)$/) do |negate, link|
+	expectation_method = negate ? :not_to : :to
+	within('#navbar') { expect(page).send(expectation_method, have_selector(:link_or_button, link)) }
+end
+
+Then(/^I should not see "(.*?)"  within "(.*?)"$/) do |text, selector|
+	within('.' + selector) { expect(page).not_to have_content text}
+end
+
+
+Then /^I should see "([^"]*)" and "([^"]*)"$/ do |text1, text2|
+	expect(page).to have_content text1
+	expect(page).to have_content text2
+end
+
+Then /^I should( not)? see "([^"]*)"$/ do |negate, text|
+	expectation_method = negate ? :not_to : :to
+	expect(page).send(expectation_method, have_content(text))
+end
+
+Then /^I should see (a|an) (error|warning|notice|success) flash: "([^"]*)"$/ do |_, flash_type, text|
+	expect(find("#flash_#{flash_type}")).to have_content(text)
+end
+
+Then(/^I should see "(.*?)" within "(.*?)"$/) do |text, selector|
+	within('#' + selector) { expect(page).to have_content text}
+end
+
+Then(/^I should not see "(.*?)" within "(.*?)"$/) do |text, selector|
+	within('#' + selector) { expect(page).not_to have_content text}
+end
+
+Then(/^I should see the following:$/) do |table|
+	table.rows.each do |text|
+		expect(page).to have_content text.first
+	end
+end
+
+Then /^I should( not)? see a link with text "([^"]*?)"$/ do |negate, link|
+	if negate
+		page.should_not have_link link
+	else
+		page.should have_link link
+	end
+end
+
+Then /^I should( not)? see a new organisations link/ do |negate|
+	#page.should_not have_link "New Organisation", :href => new_organisation_path
+	#page.should_not have_selector('a').with_attribute href: new_organisation_path
+	expectation_method = negate ? :not_to : :to
+	expect(page).send(expectation_method, have_xpath("//a[@href='#{new_organisation_path}']"))
+end
+
+Then /^I should see "([^"]*)", "([^"]*)" and "([^"]*)"$/ do |text1, text2, text3|
+	expect(page).to have_content text1
+	expect(page).to have_content text2
+	expect(page).to have_content text3
+end
+
+Then /^I should not see any address or telephone information for "([^"]*?)"$/ do |name1|
+	org1 = Organisation.find_by_name(name1)
+	page.should_not have_content org1.telephone
+	page.should_not have_content org1.address
+end
+
+Given /^I edit the donation url to be "(.*?)"$/ do |url|
+	fill_in('organisation_donation_info', with: url)
+end
+
+Then /^I should not see any edit or delete links$/ do
+	page.should_not have_link "Edit"
+	page.should_not have_link "Destroy"
+end
+
+Then /^I should not see any edit link for "([^"]*?)"$/ do |name1|
+	page.should_not have_link "Edit"
+end
+
+Then /^I should see the external website link for "(.*?)" charity$/ do |org_name|
+	org = Organisation.find_by_name org_name
+	page.should have_xpath %Q<//a[@target = "_blank" and @href = "#{org.website}" and contains(.,'#{org.website}')]>
+end
+
+And /^the search box should contain "(.*?)"$/ do |arg1|
+	expect(page).to have_xpath("//input[@id='q' and @value='#{arg1}']")
+end
+
+Then /^I should( not)? see the no results message$/ do |negate|
+	expectation_method = negate ? :not_to : :to
+	expect(page).send(expectation_method, have_content(SEARCH_NOT_FOUND))
+end
+
+Then /^I should not see any address or telephone information for "([^"]*?)" and "([^"]*?)"$/ do |name1, name2|
+	org1 = Organisation.find_by_name(name1)
+	org2 = Organisation.find_by_name(name2)
+	page.should_not have_content org1.telephone
+	page.should_not have_content org1.address
+	page.should_not have_content org2.telephone
+	page.should_not have_content org2.address
+end
+
+When(/^I visit "(.*?)"$/) do |path|
+	visit path
+end
+
+Then /^I should( not)? see an edit button for "(.*?)" charity$/ do |negate, name|
+	expectation_method = negate ? :not_to : :to
+	org = Organisation.find_by_name name
+	expect(page).send(expectation_method,
+										have_link('Edit', href: edit_organisation_path(org)))
+end
+
+Then /^I should( not)? see an edit button for "(.*?)" volunteer opportunity$/ do |negate, title|
+	expectation_method = negate ? :not_to : :to
+	op = VolunteerOp.find_by_title title
+	expect(page).send(expectation_method,
+										have_link('Edit', href: edit_volunteer_op_path(op.id)))
+end
+
+Then /^I should( not)? see "(.*?)" in the charity superadmin email$/ do |negate,email|
+	expectation_method = negate ? :not_to : :to
+	expect(page).send(expectation_method, have_selector('li', text: email))
+end

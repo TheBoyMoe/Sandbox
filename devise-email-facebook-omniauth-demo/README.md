@@ -33,7 +33,7 @@ end
 
 ```ruby
 gem 'devise', '~> 4.4', '>= 4.4.1'
-gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
+gem 'dotenv-rails', '~> 2.2', '>= 2.2.1' # goes in the :development, :test group
 ```
 
 2. Run the devise install generator
@@ -164,6 +164,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 //= require_tree .
 ```
 
+Note: If you are running Rails 5.1 and up, and you have included `//= require rails-ujs`, then `//= require jquery_ujs` is not needed anymore.
 
 12. You can define custom devise error messages using a devise helper that will display flash messages which include bootstrap classes.
    
@@ -175,7 +176,7 @@ module DeviseHelper
 	
 		messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
 		html = <<-HTML
-		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		 <div class="alert alert-danger alert-dismissible show" role="alert">
 			 <button type="button" class="close" data-dismiss="alert">
 				 <span aria-hidden="true">&times;</span>
 			 </button>
@@ -232,7 +233,7 @@ Call it in the `application.hml.erb` template like so:
 			<li><%= link_to "Log In", new_user_session_path %></li>
 		<% end %>
 	</ul>
-</nav>0
+</nav>
 ```
 
 15. simplify devise sign_up, sign_in and sign_out paths by editing `config/routes.rb`
@@ -369,7 +370,7 @@ GMAIL_PASSWORD=xxxxxxxxxxx
 
 ## Facebook Authentication Setup
 
-1. Sdd the omniauth gems to the Gemfile
+1. Add the omniauth gems to the Gemfile
 
 ```ruby
 gem 'omniauth', '~> 1.8', '>= 1.8.1'
@@ -398,6 +399,7 @@ ENV["FACEBOOK_KEY"]=xxxxxxxxxxxxxxxxxxx
 ENV["FACEBOOK_SECRET"]=xxxxxxxxxxxxxxxxxxx
 ```
 
+Make sure you've added the `dotenv-rails` gem to the `:development, :test` group of your Gemfile
 
 5. Declare the provider in `config/initializers/devise.rb` - scope gives us access to the user's email and name
 

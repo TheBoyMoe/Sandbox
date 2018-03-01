@@ -109,7 +109,7 @@ class RegistrationsController < Devise::RegistrationsController
 end
 ```
 
-and and the routing table, enabling devise to use the name attribute
+and amend the routing table, enabling devise to use the name attribute
 
 ```ruby
 devise_for :users, controllers: { registrations: 'registrations' }
@@ -272,7 +272,7 @@ class User < ApplicationRecord
 end
 ```
 
-- we'll need to add a series of columns to the user table, create a migration and add the following content:
+- we'll need to add a series of columns to the user table. Create a migration and add the following content:
 
 ```ruby
 class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
@@ -332,6 +332,13 @@ config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
 ```
 
 and start the server by entering `mailcatcher` at the command prompt. Mailcatcher will be running on port 1025 catching emails and displaying them on HTTP port 1080. After registration, go to `http://localhost:1080`, open the confirmation email and click on the link. Your account will be activated allowing you to now login.
+
+To ensure that your tests run properly, set the `:host` in your `config/routes.rb` file:
+
+```ruby
+# config/routes/rb
+default_url_options :host => "example.com"
+```
 
 
 

@@ -1,0 +1,1 @@
+class Founder < User; end

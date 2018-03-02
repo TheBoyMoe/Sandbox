@@ -1,0 +1,22 @@
+<h1><%= @type %>'s Directory</h1>
+<ul>
+	<% @users.each do |user| %>
+		<li>
+			<p>
+				<%= user.name %>&nbsp;|&nbsp;
+				<%= user.email %> |
+				<%= user.type %> |
+				<%= link_to 'Show',  sti_user_path(user.type, user) %>
+				<%= link_to 'Edit', sti_user_path(user.type, user, 'edit') %>
+				<%= link_to 'Destroy', sti_user_path(user.type, user), method: 'delete', data: {confirm: 'Are you sure?'} %>
+			</p>
+			<p><%= user.bio %></p>
+		</li>
+	<% end %>
+</ul>
+
+<br>
+<%= link_to 'All users', sti_user_path %> |
+<%= link_to 'Founders', founders_path %> |
+<%= link_to 'Developers', developers_path %> |
+<%= link_to "New #{@type}", sti_user_path(@type, nil, :new) %>

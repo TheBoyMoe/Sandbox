@@ -1,0 +1,14 @@
+<div class="social-field">
+	<span>Social</span>
+		<span class="controls">
+		<!-- fetch social media names from database-->
+			<%= f.collection_select(:name, SocialLink.all.group(:name),:name, :name, {}, {multiple: false}) %>
+	</span>
+
+		<span class="control-group">
+		<%= f.label :url, class: 'control-label' %>
+			<span class="controls">
+			<%= f.text_field :url %>
+		</span>
+	</span>
+</div>

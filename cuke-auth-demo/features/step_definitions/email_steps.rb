@@ -42,3 +42,32 @@ Given(/^I click on the retrieve password link in the last email$/) do
 	visit password_reset_link
 end
 
+And /^I should receive a "(.*?)" email$/ do |subj|
+	mails = ActionMailer::Base.deliveries
+	expect(mails).not_to be_empty
+	subjects = mails.map(&:subject)
+	expect(subjects).to include subj
+end
+
+Then(/^an email should be sent to "(.*?)" as notification of the signup by email "(.*?)"$/) do |email, user_email|
+	message = "A new user with the email #{user_email} has signed up on Harrow Community Network."
+	expect_email_exists(message: message,email: email)
+end
+
+
+And(/^an email should be sent to "(.*?)" as notification of the proposed edit to "(.*?)"$/) do |email, org_name|
+	message = "There is an edit awaiting for your approval on #{org_name}."
+	expect_email_exists(message: message, email: email)
+end
+
+And(/^an email should be sent to "(.*?)" as notice of becoming org admin of "(.*?)"$/) do |email, org_name|
+	message = "You have been made an organisation admin for the organisation called #{org_name} on the Harrow Community Network. After logging in,
+you will be able to update your organisation's directory entry."
+	expect_email_exists(message: message, email: email, link: organisation_url(Organisation.find_by(name: org_name)),
+											link_text: "Click here to view your organisation on the Harrow Community Network.")
+end
+
+And(/^an email should be sent to "(.*?)" as notification of the request for admin status of "(.*?)"$/) do |email, org_name|
+	message = "There is a user waiting for your approval on #{org_name}"
+	expect_email_exists(message: message,email: email)
+end

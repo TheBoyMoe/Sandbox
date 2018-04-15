@@ -1,4 +1,4 @@
-//  app javascript
+// app javascript
 
 let origBoard;
 const human = 'O'
@@ -7,12 +7,13 @@ const winCombinations = [
   [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
 ]
 const cells = document.querySelectorAll('.cell');
-const message = document.querySelector('#message')
+const message = document.getElementById('message');
+const endGame = document.getElementById('endgame');
 
 startGame();
 
 function startGame(){
-  document.querySelector('#endgame').style.display = 'none';
+  endGame.style.display = 'none';
   origBoard = Array.from(Array(9).keys());
   for(let i = 0; i < cells.length; i++){
     cells[i].innerText = '';
@@ -22,8 +23,13 @@ function startGame(){
 }
 
 // human move
-function turnClick(e){
-  turn(e.target.id, human)
+function turnClick(element){
+  let squareId = element.target.id;
+  // check if that square has been clicked in, does that array position contain a number
+  if(typeof origBoard[squareId] == 'number'){
+    turn(squareId, human);
+    if (!checkTie()) turn(bestSpot(), computer);
+  }
 }
 
 // update the boards state and display the move
@@ -50,7 +56,6 @@ function checkWin(board, player){
   return gameWon;
 }
 
-
 function gameOver(gameWon){
   for(let index of winCombinations[gameWon.index]){
     document.getElementById(index).style.backgroundColor = 
@@ -60,4 +65,35 @@ function gameOver(gameWon){
     // remove the event listener so no more cells can be clicked
     cells[i].removeEventListener('click', turnClick, false);
   }
+  declareWinner(gameWon.player == human? 'You win!' : 'You lose.');
 }
+
+function bestSpot(){
+  // basic ai, return the first empty square found
+  return emptySquares()[0];
+}
+
+function emptySquares(){
+  // return an array of squares still containing numbers
+  return origBoard.filter(function(square){
+    return typeof square == 'number'
+  })
+}
+
+function checkTie(){
+  if (emptySquares().length == 0) {
+    for(let i = 0; i < cells.length; i++){
+      cells[i].style.backgroundColor = 'green';
+      cells[i].removeEventListener('click', turnClick, false);
+    }
+    declareWinner('Tie Game!');
+    return true;
+  }
+  return false;
+}
+
+function declareWinner(str){
+  endGame.style.display = 'block';
+  message.textContent = str;
+}
+

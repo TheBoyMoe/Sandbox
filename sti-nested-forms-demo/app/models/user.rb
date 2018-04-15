@@ -26,7 +26,6 @@ class User < ApplicationRecord
 				array.push(item)
 			end
 		end
-		byebug
 		self.social_links.build(array)
 	end
 

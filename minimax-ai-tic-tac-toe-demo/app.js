@@ -1,6 +1,6 @@
 //  app javascript
 
-let state;
+let board;
 const player = 'O'
 const computer = 'X'
 const winCombinations = [
@@ -13,7 +13,7 @@ startGame();
 
 function startGame(){
   document.querySelector('#endgame').style.display = 'none';
-  state = Array.from(Array(9).keys());
+  board = Array.from(Array(9).keys());
   for(let i = 0; i < cells.length; i++){
     cells[i].innerText = '';
     cells[i].style.removeProperty('background-color');
@@ -21,6 +21,13 @@ function startGame(){
   }
 }
 
+// human move
 function turnClick(e){
-  console.log(e.target.id);
+  turn(e.target.id, player)
+}
+
+// update the boards state and display the move
+function turn(squareId, player){
+  board[squareId] = player;
+  document.getElementById(squareId).innerText = player;
 }

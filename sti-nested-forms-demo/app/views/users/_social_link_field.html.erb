@@ -2,7 +2,7 @@
 	<span>Social</span>
 		<span class="controls">
 		<!-- fetch social media names from database-->
-			<%= f.collection_select(:name, SocialLink.all.group(:name),:name, :name, {}, {multiple: false}) %>
+			<%= f.collection_select(:name, SocialLink.all.group(:name),:name, :name, {include_blank: true}, {multiple: false}) %>
 	</span>
 
 		<span class="control-group">

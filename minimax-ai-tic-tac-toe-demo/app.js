@@ -27,8 +27,9 @@ function turnClick(element){
   let squareId = element.target.id;
   // check if that square has been clicked in, does that array position contain a number
   if(typeof origBoard[squareId] == 'number'){
-    turn(squareId, human);
-    if (!checkTie()) turn(bestSpot(), computer);
+    let result = turn(squareId, human);
+    debugger
+    if (!result && !checkTie()) turn(bestSpot(), computer);
   }
 }
 
@@ -37,7 +38,13 @@ function turn(squareId, player){
   origBoard[squareId] = player;
   document.getElementById(squareId).innerText = player;
   let gameWon = checkWin(origBoard, player);
-  if (gameWon) gameOver(gameWon)
+  if (gameWon){
+    gameOver(gameWon);
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 function checkWin(board, player){
@@ -71,6 +78,9 @@ function gameOver(gameWon){
 function bestSpot(){
   // basic ai, return the first empty square found
   return emptySquares()[0];
+
+  // return the spot the computer should play next using minmax algorithm
+  // return minimax(origBoard, computer).index;
 }
 
 function emptySquares(){
@@ -95,5 +105,68 @@ function checkTie(){
 function declareWinner(str){
   endGame.style.display = 'block';
   message.textContent = str;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Minimax algorithm function																							 //
+/////////////////////////////////////////////////////////////////////////////
+
+function minimax(newBoard, player) {
+	// return available spots
+	var availSpots = emptySquares();
+
+	// check for terminal states, someone winning
+	if (checkWin(newBoard, human)) {
+		return {score: -10}; // player won
+	} else if (checkWin(newBoard, computer)) {
+		return {score: 10}; // computer won
+	} else if (availSpots.length === 0) {
+		return {score: 0}; // otherwise a tie
+	}
+
+	// collect the empty board positions
+	// and collect each spots index and score and save in 'move'
+	var moves = [];
+	for (var i = 0; i < availSpots.length; i++) {
+		var move = {};
+		move.index = newBoard[availSpots[i]];
+		newBoard[availSpots[i]] = player;
+
+		if (player == computer) {
+			var result = minimax(newBoard, human);
+			move.score = result.score;
+		} else {
+			var result = minimax(newBoard, computer);
+			move.score = result.score;
+		}
+
+		newBoard[availSpots[i]] = move.index;
+		moves.push(move);
+	}
+
+	// algorithm eveluates the best move
+	// choose the highest score when the computer is playing
+	// and lowest score when the human is playing
+	var bestMove;
+	if(player === computer) {
+		var bestScore = -10000;
+		for(var i = 0; i < moves.length; i++) {
+			if (moves[i].score > bestScore) {
+				bestScore = moves[i].score;
+				bestMove = i;
+			}
+		}
+	} else {
+		var bestScore = 10000;
+		for(var i = 0; i < moves.length; i++) {
+			if (moves[i].score < bestScore) {
+				bestScore = moves[i].score;
+				bestMove = i;
+			}
+		}
+	}
+
+	return moves[bestMove];
 }
 

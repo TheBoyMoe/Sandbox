@@ -1,0 +1,228 @@
+require: rubocop-rspec
+AllCops:
+  Exclude:
+    - Brewfile
+    - db/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - bin/**/*
+    - Gemfile
+    - Rakefile
+  Include:
+    - config.ru
+
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.4
+
+Naming/FileName:
+  Exclude:
+    - Guardfile
+
+Style/AndOr:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/FormatString:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 115
+
+Metrics/MethodLength:
+  Max: 20
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+
+Layout/TrailingBlankLines:
+  Enabled: false
+
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Layout/SpaceAfterComma:
+  Enabled: true
+
+Style/ParenthesesAroundCondition:
+  Enabled: true
+
+Style/HashSyntax:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: true
+
+Lint/UselessAssignment:
+  Enabled: true
+
+Layout/SpaceAroundOperators:
+  Enabled: true
+
+Layout/AlignParameters:
+  Enabled: false
+
+Style/RedundantBegin:
+  Enabled: true
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/CaseEquality:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/IndentHash:
+  Enabled: false
+
+Layout/IndentArray:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: true
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/UnneededInterpolation:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Layout/FirstParameterIndentation:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: true
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%i': ()
+    '%w': ()
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/Semicolon:
+  Enabled: false
+
+Style/UnneededPercentQ:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+  Exclude:
+    - spec/features/**/*
+
+RSpec/VerifiedDoubles:
+  Enabled: false

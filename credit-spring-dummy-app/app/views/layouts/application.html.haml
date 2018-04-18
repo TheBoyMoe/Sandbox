@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %title Dummy
+    = csrf_meta_tags
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+    = favicon_link_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    %nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+      = link_to 'Amazing', root_path, class: "navbar-brand"
+      %ul.navbar-nav.mr-auto
+        %li.nav-item
+          = link_to 'Pricing', '#', class: "nav-link"
+        %li.nav-item
+          = link_to 'About us', '#', class: "nav-link"
+        %li.nav-item
+          = link_to 'Contact', '#', class: "nav-link"
+
+      .text-white
+        - if signed_in?
+          Signed in as:
+          = link_to current_user.email, account_path
+          \.
+          = link_to 'Sign out', sign_out_path, method: :delete
+        - else
+          = link_to 'Sign in', sign_in_path
+    .container-fluid.my-5= yield

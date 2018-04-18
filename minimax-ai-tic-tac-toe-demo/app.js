@@ -28,7 +28,6 @@ function turnClick(element){
   // check if that square has been clicked in, does that array position contain a number
   if(typeof origBoard[squareId] == 'number'){
     let result = turn(squareId, human);
-    debugger
     if (!result && !checkTie()) turn(bestSpot(), computer);
   }
 }

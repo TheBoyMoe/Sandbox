@@ -14,17 +14,8 @@ class UsersController < Clearance::UsersController
   end
 
   private
-    def user_details
-      params.require(:user).permit(:email, :password)
-    end
 
-    # def whitelisted_users
-    #   byebug
-    #   if params[:user][:email] && !params[:user][:email].empty?
-    #     whitelist = ['a@a.com', 'b@b.com', 'c@c.com']
-    #     if !whitelist.include? params[:user][:email]
-    #       render 'new'
-    #     end
-    #   end
-    # end
+  def user_details
+    params.require(:user).permit(:email, :password)
+  end
 end

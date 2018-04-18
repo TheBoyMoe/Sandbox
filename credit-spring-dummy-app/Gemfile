@@ -1,0 +1,37 @@
+ruby "2.4.2"
+source "https://rubygems.org"
+
+gem "sqlite3"
+gem "puma"
+gem "rails"
+
+gem "sass-rails", "~> 5.0"
+gem "turbolinks", "~> 5"
+gem "uglifier", ">= 1.3.0"
+
+gem 'bootstrap'
+gem 'haml'
+
+gem 'clearance'
+
+gem "pry-rails"
+
+group :development do
+  gem 'spring-commands-rspec'
+  gem 'spring-commands-rubocop'
+end
+
+group :development, :test do
+  gem "dotenv-rails"
+  gem "pry-byebug"
+  gem "rubocop", require: false
+  gem "rubocop-rspec", require: false
+end
+
+group :test do
+  gem "capybara"
+  gem "database_cleaner"
+  gem "factory_bot"
+  gem 'rails-controller-testing'
+  gem "rspec-rails"
+end

@@ -1,0 +1,1 @@
+class Whitelist < ApplicationRecord; end

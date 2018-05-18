@@ -65,3 +65,5 @@ devise-google-omniauth-demo/log/*
 devise-google-omniauth-demo/.env
 devise-google-omniauth-demo/db/*.sqlite
 
+// Rails Elastic Search
+rails-elastic-search-demo/elasticsearch-6.2.3/

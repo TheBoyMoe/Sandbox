@@ -18,6 +18,16 @@ module Api
         end
       end
 
+      def destroy
+        # only destroy posts belonging to the user
+        @post = @user.posts.find_by(params[:id])
+        if @post
+          @post.destroy # returns status 204(no content)
+        else
+          render json: {post: "not found"}, status: :not_found
+        end
+      end
+
       private
         def post_params
           params.require(:post).permit(:title, :body)

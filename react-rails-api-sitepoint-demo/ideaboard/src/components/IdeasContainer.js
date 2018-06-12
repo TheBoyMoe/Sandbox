@@ -8,7 +8,8 @@ import IdeaForm from './IdeaForm';
 export default class IdeasContainer extends React.Component {
   state = {
     ideas: [],
-    editingIdeaId: null
+    editingIdeaId: null,
+    nofification: ''
   };
 
   componentDidMount(){
@@ -44,7 +45,14 @@ export default class IdeasContainer extends React.Component {
     const ideas = update(this.state.ideas, {
       [ideaIndex]: { $set: idea }
     });
-    this.setState({ ideas: ideas });
+    this.setState({ 
+      ideas: ideas,
+      notification: 'Changes saved'
+    });
+  };
+
+  resetNotification = () => {
+    this.setState({ notification: '' });
   };
 
   render(){
@@ -53,10 +61,12 @@ export default class IdeasContainer extends React.Component {
         <button 
           onClick={ this.addNewIdea }
           className="newIdeaButton">Add an Idea</button>
+        <span className="notifaction">{ this.state.notification }</span>
         <div>
           { this.state.ideas.map(idea => {
             if(this.state.editingIdeaId === idea.id){
-              return <IdeaForm 
+              return <IdeaForm
+                       resetNotification={ this.resetNotification }
                        updateIdea={ this.updateIdea }
                        key={ idea.id } 
                        { ...idea }/>

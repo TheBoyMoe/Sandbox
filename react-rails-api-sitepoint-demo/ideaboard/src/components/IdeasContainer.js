@@ -3,10 +3,12 @@ import axios from 'axios';
 import update from 'immutability-helper';
 
 import Idea from './Idea';
+import IdeaForm from './IdeaForm';
 
 export default class IdeasContainer extends React.Component {
   state = {
-    ideas: []
+    ideas: [],
+    editingIdeaId: null
   };
 
   componentDidMount(){
@@ -29,10 +31,21 @@ export default class IdeasContainer extends React.Component {
         console.log(res);
         // update the state immutably
         const updatedIdeas = update(this.state.ideas, {$splice: [[0, 0, res.data]]});
-        this.setState({ ideas: updatedIdeas });
+        this.setState({ 
+          ideas: updatedIdeas,
+          editingIdeaId: res.data.id
+        });
       })
       .catch(err => console.log(err));
   }
+
+  updateIdea = (idea) => {
+    const ideaIndex = this.state.ideas.findIndex(x => x.id === idea.id);
+    const ideas = update(this.state.ideas, {
+      [ideaIndex]: { $set: idea }
+    });
+    this.setState({ ideas: ideas });
+  };
 
   render(){
     return(
@@ -40,11 +53,18 @@ export default class IdeasContainer extends React.Component {
         <button 
           onClick={ this.addNewIdea }
           className="newIdeaButton">Add an Idea</button>
-        <ul>
+        <div>
           { this.state.ideas.map(idea => {
-            return <Idea key={idea.id} { ...idea }/>
+            if(this.state.editingIdeaId === idea.id){
+              return <IdeaForm 
+                       updateIdea={ this.updateIdea }
+                       key={ idea.id } 
+                       { ...idea }/>
+            } else {
+              return <Idea key={ idea.id } { ...idea }/>
+            }
           })}
-        </ul>
+        </div	>
       </div>
     );
   }

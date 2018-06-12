@@ -35,6 +35,7 @@ export default class IdeaForm extends React.Component {
           <input 
 						value={ this.state.title }
 						onChange={ this.handleInput }
+            ref={ this.props.titleRef }
 						className="input" 
 						type="text" 
 						name="title" 

@@ -1,12 +1,17 @@
 import React from 'react';
 
-const Idea = ({ title, body }) => {
-  return (
-    <div className="tile">
-      <h3>{ title }</h3>
-      <p>{ body }</p>
-    </div>
-  );
+export default class Idea extends React.Component {
+  handleClick = () => {
+    this.props.clicked(this.props.id);
+  };
+
+  render(){
+    return (
+      <div className="tile">
+        <h3 onClick={ this.handleClick }>{ this.props.title }</h3>
+        <p onClick={ this.handleClick }>{ this.props.body }</p>
+      </div>
+    );
+  }
 }
 
-export default Idea;

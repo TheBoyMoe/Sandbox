@@ -55,6 +55,10 @@ export default class IdeasContainer extends React.Component {
     this.setState({ notification: '' });
   };
 
+  enableEditing = (id) => {
+    this.setState({ editingIdeaId: id }, () => { this.title.focus() });
+  };
+
   render(){
     return(
       <div>
@@ -66,12 +70,16 @@ export default class IdeasContainer extends React.Component {
           { this.state.ideas.map(idea => {
             if(this.state.editingIdeaId === idea.id){
               return <IdeaForm
+                       titleRef={ input => this.title = input }
                        resetNotification={ this.resetNotification }
                        updateIdea={ this.updateIdea }
                        key={ idea.id } 
                        { ...idea }/>
             } else {
-              return <Idea key={ idea.id } { ...idea }/>
+              return <Idea
+                      clicked={ this.enableEditing }
+                      key={ idea.id }
+                      { ...idea }/>
             }
           })}
         </div	>

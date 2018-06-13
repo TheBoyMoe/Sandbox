@@ -1,16 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Todos API', type: :request do
-  # add todos owner
-  let(:user) { create(:user) }
-  let!(:todos) { create_list(:todo, 10, created_by: user.id) }
+  let!(:todos) { create_list(:todo, 10) }
   let(:todo_id) { todos.first.id }
-  # authorize request
-  let(:headers) { valid_headers }
 
   describe 'GET /todos' do
-    # update request with headers
-    before { get '/todos', params: {}, headers: headers }
+    before { get '/todos' }
 
     it 'returns todos' do
       expect(json).not_to be_empty
@@ -23,9 +18,10 @@ RSpec.describe 'Todos API', type: :request do
   end
 
   describe 'GET /todos/:id' do
-    before { get "/todos/#{todo_id}", params: {}, headers: headers }
+    before { get "/todos/#{todo_id}" }
 
     context 'when the record exists' do
+
       it 'returns the todo' do
         expect(json).not_to be_empty
         expect(json['id']).to eq(todo_id)
@@ -50,13 +46,10 @@ RSpec.describe 'Todos API', type: :request do
   end
 
   describe 'POST /todos' do
-     let(:valid_attributes) do
-      # send json payload
-      { title: 'Learn Elm', created_by: user.id.to_s }.to_json
-    end
+    let(:valid_attributes) { { title: 'Learn Elm', created_by: '1' } }
 
-    context 'when request is valid' do
-      before { post '/todos', params: valid_attributes, headers: headers }
+    context 'when the request is valid' do
+      before { post '/todos', params: valid_attributes }
 
       it 'creates a todo' do
         expect(json['title']).to eq('Learn Elm')
@@ -68,25 +61,23 @@ RSpec.describe 'Todos API', type: :request do
     end
 
     context 'when the request is invalid' do
-      let(:invalid_attributes) { { title: nil }.to_json }
-      before { post '/todos', params: invalid_attributes, headers: headers }
+      before { post '/todos', params: { title: 'Foobar' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns a validation failure message' do
-        expect(json['message'])
-          .to match(/Validation failed: Title can't be blank/)
+        expect(response.body).to match(/Validation failed: Created by can't be blank/)
       end
     end
   end
 
   describe 'PUT /todos/:id' do
-    let(:valid_attributes) { { title: 'Shopping' }.to_json }
+    let(:valid_attributes) {{ title: 'Shopping' }}
 
     context 'when the record exists' do
-      before { put "/todos/#{todo_id}", params: valid_attributes, headers: headers }
+      before { put "/todos/#{todo_id}", params: valid_attributes }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -99,7 +90,7 @@ RSpec.describe 'Todos API', type: :request do
   end
 
   describe 'DELETE /todos/:id' do
-    before { delete "/todos/#{todo_id}", params: {}, headers: headers }
+    before { delete "/todos/#{todo_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

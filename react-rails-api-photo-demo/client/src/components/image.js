@@ -1,7 +1,13 @@
 import React from 'react';
 
-export const image = (props) => {
+const image = ({ title, path, user }) => {
   return (
-    <div></div>
+    <li>
+      <h3>{ title }</h3>
+      <p>{ path }</p>
+      <p>{ user.name }</p>
+    </li>
   );
 };
+
+export default image;

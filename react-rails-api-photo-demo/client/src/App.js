@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Images from './containers/Images';
+import Gallery from './containers/Gallery/Gallery';
+import Layout from './components/Layout/Layout';
 
 class App extends Component {
   render(){
     return(
       <div>
-        <Images />
+        <Layout>
+          <Gallery />
+        </Layout>
       </div>
     );
   }

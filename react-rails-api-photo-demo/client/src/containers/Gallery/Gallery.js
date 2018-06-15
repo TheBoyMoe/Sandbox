@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 
-import Image from '../components/image';
-import './Images.css';
+import Image from './Image/image';
+import './Gallery.css';
 
-export default class Images extends React.Component {
+export default class Gallery extends React.Component {
   state = {
     images: []
   }

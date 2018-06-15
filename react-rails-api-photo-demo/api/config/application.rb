@@ -20,5 +20,6 @@ module Api
   class Application < Rails::Application
     config.load_defaults 5.1
     config.api_only = true
+    config.middleware.use Rack::Attack
   end
 end

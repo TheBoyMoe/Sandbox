@@ -12,6 +12,7 @@ gem 'active_model_serializers', '~> 0.10.7'
 gem 'jbuilder', '~> 2.7'
 gem 'foreman', '~> 0.84.0'
 gem 'rack-cors', '~> 1.0', '>= 1.0.2'
+gem 'rack-attack', '~> 5.2'
 
 
 group :development, :test do

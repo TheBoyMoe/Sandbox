@@ -1,5 +1,7 @@
 .Logo {
-  height: 100%;
+  height: 56px;
+  width: 56px;
+  float: left;
   margin-left: 16px;
 }
 

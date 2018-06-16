@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 
 import Image from './Image/image';
-import './Gallery.css';
+import './Explore.css';
 
-export default class Gallery extends React.Component {
+export default class Explore extends React.Component {
   state = {
     images: []
   }
@@ -25,9 +25,12 @@ export default class Gallery extends React.Component {
       return <Image key={ image.id } { ...image } />
     })
     return (
-      <ul className="Gallery">
-        {images}
-      </ul>
+      <div>
+        <h1>Explore our collection</h1>
+        <ul className="Gallery">
+          {images}
+        </ul>
+      </div>
     );
   }
 }

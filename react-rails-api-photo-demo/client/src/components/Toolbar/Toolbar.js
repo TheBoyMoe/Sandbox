@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import Logo from './Logo/Logo';
-import NavItem from './NavItems/NavItem/NavItem';
+import NavItem from './NavItem/NavItem';
 
 import './Toolbar.css';
 
@@ -17,11 +17,11 @@ const toolbar = () => {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem link="/" active >Home</NavItem>
-            <NavItem link="#">Explore</NavItem>
-            <NavItem link="#">Collections</NavItem>
-            <NavItem link="#">Submit a Photo</NavItem>
-            <NavItem link="#">Login</NavItem>
+            <NavItem link="/" exact>Home</NavItem>
+            <NavItem link="/explore">Explore</NavItem>
+            <NavItem link="/collections">Collections</NavItem>
+            <NavItem link="/submission">Submit a Photo</NavItem>
+            <NavItem link="/auth">Login</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

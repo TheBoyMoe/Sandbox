@@ -7,7 +7,7 @@ const layout = (props) => {
   return (
     <div>
       <Toolbar />
-      <main className="Content">
+      <main className="Content container">
         { props.children }
       </main>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
 
-const signup = () => {
+const signup = (props) => {
   return (
     <div className="Signup">
       <h1 className="center">Sign Up</h1>
@@ -12,8 +12,11 @@ const signup = () => {
         <Input type="password" label="Confirm password" name="password_confirmation" placeholder="Confirm your password" />
         <Input type="submit" name="submit" value="Submit" />
       </form>
-      {/* TODO link to login page */}
-      <p className="center">Already registered? <strong>Login</strong></p>
+      <p className="center">Already registered?&nbsp;
+        <strong 
+          className="pointer"
+          onClick={ props.clicked }>Login</strong>
+      </p>
     </div>
   );
 };

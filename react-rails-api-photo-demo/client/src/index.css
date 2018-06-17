@@ -8,3 +8,11 @@ body {
 .center {
   text-align: center;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  margin-top: 40px;
+}

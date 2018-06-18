@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../../../components/UI/input/input';
 import { login } from '../utilities/api-helpers';
 import { saveToken, isAuthenticated, removeToken } from '../utilities/auth-helpers';
+import { checkValidityOfInput } from '../utilities/validity';
 
 class Login extends React.Component {
   state = {
@@ -38,33 +39,13 @@ class Login extends React.Component {
     error: ''
   };
 
-  checkValidityOfInput = (value, requirements) => {
-    let isValid = true;
-
-    if(requirements.required) 
-      isValid = value.trim() !== '' && isValid;
-
-    if(requirements.minLength)
-      isValid = value.length >= requirements.minLength && isValid;
-
-    if(requirements.maxLength)
-      isValid = value.length <= requirements.maxLength && isValid;
-
-    if(requirements.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test( value ) && isValid
-    }  
-
-    return isValid;
-  }
-
   onChangeHandler = (e, name) => {
     const value = e.target.value;
     const clone = {
       ...this.state
     }
     clone[name].touched = true;
-    clone[name].valid = this.checkValidityOfInput(value, clone[name].validation);
+    clone[name].valid = checkValidityOfInput(value, clone[name].validation);
     clone[name].value = value;
 
     let formIsValid = true;

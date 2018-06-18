@@ -78,10 +78,16 @@ class Signup extends React.Component {
 
     let formIsValid = true;
     for(let prop in clone){
-      if(prop === 'name' || prop === 'email' || prop === 'password'){
+      if(prop === 'name' || prop === 'email' || prop === 'password' || prop === 'password_confirmation'){
         formIsValid = clone[prop].valid && formIsValid;
       }
     }
+    
+    if(clone.password.value !== clone.password_confirmation.value)
+      clone.password_confirmation.valid = false;
+
+    formIsValid = clone.password.value === clone.password_confirmation.value && formIsValid;
+
     clone.formIsValid = formIsValid;
     
     this.setState({ ...clone })
@@ -117,7 +123,6 @@ class Signup extends React.Component {
               label={ this.state.email.elementConfig.label }
               placeholder={ this.state.email.elementConfig.placeholder } />
 
-
           <Input
             name="password"
             value={ this.state.password.value }
@@ -127,6 +132,16 @@ class Signup extends React.Component {
             type={ this.state.password.elementConfig.type } 
             label={ this.state.password.elementConfig.label } 
             placeholder={ this.state.password.elementConfig.placeholder } />
+
+          <Input
+            name="password_confirmation"
+            value={ this.state.password_confirmation.value }
+            invalid={ !this.state.password_confirmation.valid }
+            touched={ this.state.password_confirmation.touched }
+            changed={ (e) => this.onChangeHandler(e, "password_confirmation") }
+            type={ this.state.password_confirmation.elementConfig.type } 
+            label={ this.state.password_confirmation.elementConfig.label } 
+            placeholder={ this.state.password_confirmation.elementConfig.placeholder } />
 
           <Input 
             type="submit" 

@@ -7,7 +7,7 @@ class Login extends React.Component {
       elementConfig: {
         type: 'email',
         placeholder: 'Your email address',
-        label: "Email address"
+        label: "Email address" 
       },
       value: '',
       validation: {
@@ -32,8 +32,15 @@ class Login extends React.Component {
     }
   };
 
-  onChangeHandler = (e) => {
-    console.log(e.target.value);
+  onChangeHandler = (e, name) => {
+    const value = e.target.value;
+    const clone = {
+      ...this.state
+    }
+    clone[name].value = value;
+    this.setState({
+      state: clone
+    })    
   }
 
   onSubmitHandler = (e) => {
@@ -47,18 +54,20 @@ class Login extends React.Component {
         <h1 className="center">Login</h1>
 
         <form onSubmit={ this.onSubmitHandler }>
-          <Input 
+          <Input
+            name="email"
             value={ this.state.email.value }
             invalid={ !this.state.email.valid }
-            changed={ this.onChangeHandler }
+            changed={(e) => this.onChangeHandler(e, "email") }
             type={ this.state.email.elementConfig.type }
             label={ this.state.email.elementConfig.label }
             placeholder={ this.state.email.elementConfig.placeholder } />
 
-          <Input 
+          <Input
+            name="password"
             value={ this.state.password.value }
             invalid={ !this.state.password.valid }
-            changed={ this.onChangeHandler }
+            changed={(e) => this.onChangeHandler(e, "password") }
             type={ this.state.password.elementConfig.type} 
             label={ this.state.password.elementConfig.label } 
             placeholder={ this.state.password.elementConfig.placeholder } />

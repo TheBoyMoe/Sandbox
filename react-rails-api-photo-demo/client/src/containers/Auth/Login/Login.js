@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
 import { login } from '../utilities/api-helpers';
+import { saveToken, isAuthenticated, removeToken } from '../utilities/auth-helpers';
 
 class Login extends React.Component {
   state = {
@@ -45,29 +46,34 @@ class Login extends React.Component {
     })    
   }
 
-  onSubmitHandler = (e) => {
+  onSubmitHandler = (e) => { 
     e.preventDefault();
     const user = {
       "email": this.state.email.value,
       "password": this.state.password.value
     }
 
+    // clear any saved token
+    removeToken();
+
     // login the user and save the jwt to local storage
     login({ "auth": user })
       .then(data => {
-        if(data.ok && data.status === 201)
+        if(data.ok && data.status === 201){
+          this.setState({
+            error: ''
+          });
           return data.json();
-        else
-          console.log('Error', data.statusText);
+        } else {
           this.setState({
             error: data.statusText
-          })
+          });
+        }
       })
       .then(jwt => {
-        console.log(jwt);
-        // TODO save the jwt
+        if(jwt) saveToken(jwt);
+        console.log('isAuthenticated:', !!isAuthenticated());
       });
-      // .catch(err => console.log('User not found'));
   };
 
   render(){

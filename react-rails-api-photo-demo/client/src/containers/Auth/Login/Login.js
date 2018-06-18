@@ -61,9 +61,16 @@ class Login extends React.Component {
     clone[name].touched = true;
     clone[name].valid = this.checkValidityOfInput(value, clone[name].validation);
     clone[name].value = value;
-    this.setState({
-      state: clone
-    })    
+
+    let formIsValid = true;
+    for(let prop in clone){
+      if(prop === 'email' || prop === 'password'){
+        formIsValid = clone[prop].valid && formIsValid;
+      }
+    }
+    clone.formIsValid = formIsValid;
+    
+    this.setState({ ...clone })
   }
 
   onSubmitHandler = (e) => { 
@@ -122,7 +129,10 @@ class Login extends React.Component {
             label={ this.state.password.elementConfig.label } 
             placeholder={ this.state.password.elementConfig.placeholder } />
 
-          <Input type="submit" value="Submit" />
+          <Input 
+            type="submit" 
+            disabled={ !this.state.formIsValid }
+            value="Submit" />
         </form>
         <p className="center">Not registered?&nbsp;
           <strong 

@@ -10,10 +10,15 @@ const input = (props) => {
   const inputClasses = [];
   if(props.invalid && props.touched) inputClasses.push('Invalid');
 
+  let disabled = false;
+  if(props.disabled) 
+    disabled = true;
+
   return (
     <div className="Input">
       { label } 
       <input
+        disabled={ disabled }
         className={ inputClasses.join(' ') }
         name={ props.name }
         onChange={ props.changed }

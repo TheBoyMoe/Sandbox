@@ -30,3 +30,8 @@
   border: 1px solid rgb(245, 92, 92);
   background-color: rgb(247, 153, 143);
  }
+
+ .Input input[disabled] {
+   background-color: #e9e6e6;
+   cursor: not-allowed;
+ }

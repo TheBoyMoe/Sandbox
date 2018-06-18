@@ -50,6 +50,11 @@ class Login extends React.Component {
     if(requirements.maxLength)
       isValid = value.length <= requirements.maxLength && isValid;
 
+    if(requirements.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test( value ) && isValid
+    }  
+
     return isValid;
   }
 
@@ -73,7 +78,7 @@ class Login extends React.Component {
     this.setState({ ...clone })
   }
 
-  onSubmitHandler = (e) => { 
+  onSubmitHandler = (e) => {
     e.preventDefault();
     const user = {
       "email": this.state.email.value,

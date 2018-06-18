@@ -16,7 +16,8 @@ class Login extends React.Component {
         required: true,
         isEmail: true
       },
-      valid: false
+      valid: false,
+      touched: false
     },
     password : {
       elementConfig: {
@@ -30,16 +31,35 @@ class Login extends React.Component {
         minLength: 8,
         maxLength: 72
       },
-      valid: false
+      valid: false,
+      touched: false
     },
+    formIsValid: false,
     error: ''
   };
+
+  checkValidityOfInput = (value, requirements) => {
+    let isValid = true;
+
+    if(requirements.required) 
+      isValid = value.trim() !== '' && isValid;
+
+    if(requirements.minLength)
+      isValid = value.length >= requirements.minLength && isValid;
+
+    if(requirements.maxLength)
+      isValid = value.length <= requirements.maxLength && isValid;
+
+    return isValid;
+  }
 
   onChangeHandler = (e, name) => {
     const value = e.target.value;
     const clone = {
       ...this.state
     }
+    clone[name].touched = true;
+    clone[name].valid = this.checkValidityOfInput(value, clone[name].validation);
     clone[name].value = value;
     this.setState({
       state: clone
@@ -86,6 +106,7 @@ class Login extends React.Component {
             name="email"
             value={ this.state.email.value }
             invalid={ !this.state.email.valid }
+            touched={ this.state.email.touched }
             changed={ (e) => this.onChangeHandler(e, "email") }
             type={ this.state.email.elementConfig.type }
             label={ this.state.email.elementConfig.label }
@@ -95,6 +116,7 @@ class Login extends React.Component {
             name="password"
             value={ this.state.password.value }
             invalid={ !this.state.password.valid }
+            touched={ this.state.password.touched }
             changed={ (e) => this.onChangeHandler(e, "password") }
             type={ this.state.password.elementConfig.type } 
             label={ this.state.password.elementConfig.label } 

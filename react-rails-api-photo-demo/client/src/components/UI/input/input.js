@@ -6,10 +6,15 @@ const input = (props) => {
   if(props.label)
     label = <label>{ props.label }</label> ;
 
+  // update the input field to show the user whe n input is invalid  
+  const inputClasses = [];
+  if(props.invalid && props.touched) inputClasses.push('Invalid');
+
   return (
     <div className="Input">
       { label } 
       <input
+        className={ inputClasses.join(' ') }
         name={ props.name }
         onChange={ props.changed }
         type={ props.type }

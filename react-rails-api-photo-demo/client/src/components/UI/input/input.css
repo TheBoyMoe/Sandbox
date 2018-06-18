@@ -12,7 +12,7 @@
 
 .Input input {
   outline: none;
-  border: 1px solid #dfdfdf;
+  border: 1px solid #e9e6e6;
   background-color: #ffffff;
   font: inherit;
   padding: 10px;
@@ -25,3 +25,8 @@
   outline: none;
   background-color: #dfdfdf;
 }
+
+.Input input.Invalid {
+  border: 1px solid rgb(245, 92, 92);
+  background-color: rgb(247, 153, 143);
+ }

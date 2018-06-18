@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
+import { login } from '../utilities/api-helpers';
 
 class Login extends React.Component {
   state = {
@@ -29,7 +30,8 @@ class Login extends React.Component {
         maxLength: 72
       },
       valid: false
-    }
+    },
+    error: ''
   };
 
   onChangeHandler = (e, name) => {
@@ -45,7 +47,27 @@ class Login extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log('message from login')
+    const user = {
+      "email": this.state.email.value,
+      "password": this.state.password.value
+    }
+
+    // login the user and save the jwt to local storage
+    login({ "auth": user })
+      .then(data => {
+        if(data.ok && data.status === 201)
+          return data.json();
+        else
+          console.log('Error', data.statusText);
+          this.setState({
+            error: data.statusText
+          })
+      })
+      .then(jwt => {
+        console.log(jwt);
+        // TODO save the jwt
+      });
+      // .catch(err => console.log('User not found'));
   };
 
   render(){
@@ -58,7 +80,7 @@ class Login extends React.Component {
             name="email"
             value={ this.state.email.value }
             invalid={ !this.state.email.valid }
-            changed={(e) => this.onChangeHandler(e, "email") }
+            changed={ (e) => this.onChangeHandler(e, "email") }
             type={ this.state.email.elementConfig.type }
             label={ this.state.email.elementConfig.label }
             placeholder={ this.state.email.elementConfig.placeholder } />
@@ -67,8 +89,8 @@ class Login extends React.Component {
             name="password"
             value={ this.state.password.value }
             invalid={ !this.state.password.valid }
-            changed={(e) => this.onChangeHandler(e, "password") }
-            type={ this.state.password.elementConfig.type} 
+            changed={ (e) => this.onChangeHandler(e, "password") }
+            type={ this.state.password.elementConfig.type } 
             label={ this.state.password.elementConfig.label } 
             placeholder={ this.state.password.elementConfig.placeholder } />
 

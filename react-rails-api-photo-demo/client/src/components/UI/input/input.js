@@ -9,7 +9,11 @@ const input = (props) => {
   return (
     <div className="Input">
       { label } 
-      <input { ...props }/>
+      <input 
+        onChange={ props.changed }
+        type={ props.type }
+        placeholder={ props.placeholder }
+        value={ props.value }/>
     </div>
   );
 };

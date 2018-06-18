@@ -12,12 +12,16 @@ class Auth extends React.Component {
       alreadyRegistered: !this.state.alreadyRegistered
     })
   }
+
+  onSubmitHandler = (data) => {
+    console.log(data)
+  }
   
   render(){
     let output = null;
     output = (this.state.alreadyRegistered)?
-      <Login clicked={ this.onClickHandler }/> :
-      <Signup clicked={ this.onClickHandler }/>;
+      <Login clicked={ this.onClickHandler } submitted={ this.onSubmitHandler } /> :
+      <Signup clicked={ this.onClickHandler } submitted={ this.onSubmitHandler } />;
     
     return(
       <div>

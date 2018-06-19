@@ -141,7 +141,29 @@ class Signup extends React.Component {
   };
 
   onClickHandler = () => {
-    this.setState({ error: '' });
+    const nameUpdate = {
+      ...this.state.name,
+      value: ''
+    }
+    const emailUpdate = {
+      ...this.state.email,
+      value: ''
+    }
+    const passwordUpdate = {
+      ...this.state.password,
+      value: ''
+    }
+    const passwordConfirmationUpdate = {
+      ...this.state.password_confirmation,
+      value: ''
+    }
+    this.setState({
+      name: nameUpdate,
+      email: emailUpdate,
+      password: passwordUpdate,
+      password_confirmation: passwordConfirmationUpdate,
+      error: ''
+    })
   }
 
   render(){

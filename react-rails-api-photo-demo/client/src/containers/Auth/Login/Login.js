@@ -77,9 +77,7 @@ class Login extends React.Component {
           this.setState({ error: '' });
           return data.json();
         } else {
-          // TODO display message to user
-          console.log('User not found or email is invalid');
-          this.setState({ error: data.statusText });
+          this.setState({ error: 'User not found or password is invalid' });
         }
       })
       .then(jwt => {
@@ -90,7 +88,19 @@ class Login extends React.Component {
   };
 
   onClickHandler = () => {
-    this.setState({ error: '' });
+    const emailUpdate = {
+      ...this.state.email,
+      value: ''
+    }
+    const passwordUpdate = {
+      ...this.state.password,
+      value: ''
+    }
+    this.setState({
+      email: emailUpdate,
+      password: passwordUpdate,
+      error: ''
+    })
   }
 
   render(){

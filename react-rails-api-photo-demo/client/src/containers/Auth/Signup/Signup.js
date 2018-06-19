@@ -3,6 +3,7 @@ import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
 import { removeToken, saveToken, isAuthenticated } from '../utilities/auth-helpers';
 import { signup, login } from '../utilities/api-helpers';
+// import GenerateErrorMessage  from '../../../utilities/GenerageMessage';
 
 class Signup extends React.Component {
   state = {
@@ -119,6 +120,7 @@ class Signup extends React.Component {
           } else {
             console.log('User already registered.');
             // TODO redirect user to login page
+            this.setState({ error: 'User already registered'});
           }
         } else {
           this.setState({ error: data.statusText });
@@ -138,11 +140,32 @@ class Signup extends React.Component {
       .catch(err => console.log(err));
   };
 
+  onClickHandler = () => {
+    this.setState({ error: '' });
+  }
+
   render(){
+    let errorMessage = null;
+    if(this.state.error) {
+      // errorMessage = <GenerateErrorMessage message={this.state.error} styles={['alert', 'alert-danger']} />;
+      // errorMessage = (
+      //   <ErrorBoundary>
+      //     <Alert style="danger" message={ this.state.error }/>
+      //   </ErrorBoundary>
+      // )
+      errorMessage = (
+        <div className="alert alert-danger" role="alert">
+          <button onClick={ this.onClickHandler } type="button" className="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{ this.state.error }</strong>
+        </div>
+      );
+    }
     return (
       <div className="Signup">
+        { errorMessage }
         <h1 className="center">Sign Up</h1>
-        
         <form onSubmit={ this.onSubmitHandler }>
           <Input
             name="name"

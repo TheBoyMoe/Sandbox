@@ -89,9 +89,26 @@ class Login extends React.Component {
       .catch(err => console.log(err));
   };
 
+  onClickHandler = () => {
+    this.setState({ error: '' });
+  }
+
   render(){
+    let errorMessage = null;
+    if(this.state.error) {
+      errorMessage = (
+        <div className="alert alert-danger" role="alert">
+          <button onClick={ this.onClickHandler } type="button" className="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{ this.state.error }</strong>
+        </div>
+      );
+    }
+
     return (
       <div className="Login">
+        { errorMessage }
         <h1 className="center">Login</h1>
 
         <form onSubmit={ this.onSubmitHandler }>

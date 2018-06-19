@@ -8,10 +8,8 @@ export const login = (data) => {
     credentials: 'include',
     body: JSON.stringify(data)
   })
-    .then(res => {
-      return res;
-    })
-    .catch(err => console.log(err));
+    .then(res => res)
+    .catch(err => console.log('Login error', err));
 };
 
 export const logout = () => { 
@@ -19,5 +17,15 @@ export const logout = () => {
 };
 
 export const signup = (user) => {
-  console.log('Signup', user);
+  return fetch('/api/v1/users', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(user)
+  })
+    .then(res => res)
+    .catch(err => console.log('Signup error:', err));
 };

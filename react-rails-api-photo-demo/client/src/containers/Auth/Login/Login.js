@@ -72,21 +72,21 @@ class Login extends React.Component {
     // login the user and save the jwt to local storage
     login({ "auth": user })
       .then(data => {
-        if(data.ok && data.status === 201){
-          this.setState({
-            error: ''
-          });
+        // console.log(data);
+        if(data.ok && data.status === 201){          
+          this.setState({ error: '' });
           return data.json();
         } else {
-          this.setState({
-            error: data.statusText
-          });
+          // TODO display message to user
+          console.log('User not found or email is invalid');
+          this.setState({ error: data.statusText });
         }
       })
       .then(jwt => {
         if(jwt) saveToken(jwt);
         console.log('isAuthenticated:', !!isAuthenticated());
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   render(){

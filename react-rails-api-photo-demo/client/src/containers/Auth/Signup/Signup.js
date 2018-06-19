@@ -1,6 +1,8 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
+import { removeToken, saveToken, isAuthenticated } from '../utilities/auth-helpers';
+import { signup, login } from '../utilities/api-helpers';
 
 class Signup extends React.Component {
   state = {
@@ -82,7 +84,7 @@ class Signup extends React.Component {
         formIsValid = clone[prop].valid && formIsValid;
       }
     }
-    
+
     if(clone.password.value !== clone.password_confirmation.value)
       clone.password_confirmation.valid = false;
 
@@ -94,7 +96,46 @@ class Signup extends React.Component {
   };
 
   onSubmitHandler = (e) => {
+    e.preventDefault();
+    const user = {
+      "name": this.state.name.value,
+      "email": this.state.email.value,
+      "password": this.state.password.value,
+      "password_confirmation": this.state.password_confirmation.value
+    };
 
+    removeToken();
+
+    // signup and log the user in if successful
+    signup({ "user": user })
+      .then(data => {
+        // console.log(data);
+        if(data && data.ok){
+          if(data.status === 200){
+            this.setState({ error: ''});
+            return login({ 
+              "auth": {"email": this.state.email.value, "password": this.state.password.value }
+            });
+          } else {
+            console.log('User already registered.');
+            // TODO redirect user to login page
+          }
+        } else {
+          this.setState({ error: data.statusText });
+        }
+      })
+      .then(res => {
+        if(res.ok && res.status === 201){
+          return res.json();
+        } else {
+          this.setState({ error: res.statusText });
+        }
+      })
+      .then(jwt => {
+        if(jwt) saveToken(jwt);
+        console.log('isAuthenticated: ', !!isAuthenticated());
+      })
+      .catch(err => console.log(err));
   };
 
   render(){

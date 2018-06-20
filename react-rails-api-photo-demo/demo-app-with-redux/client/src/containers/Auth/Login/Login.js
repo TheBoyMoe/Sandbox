@@ -3,6 +3,8 @@ import Input from '../../../components/UI/input/input';
 import { login } from '../utilities/api-helpers';
 import { saveToken, isAuthenticated, removeToken } from '../utilities/auth-helpers';
 import { checkValidityOfInput } from '../utilities/validity';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
 class Login extends React.Component {
   state = {
@@ -59,32 +61,43 @@ class Login extends React.Component {
     this.setState({ ...clone })
   }
 
+  // onSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   const user = {
+  //     "email": this.state.email.value,
+  //     "password": this.state.password.value
+  //   }
+
+  //   // clear any saved token
+  //   removeToken();
+
+  //   // login the user and save the jwt to local storage
+  //   login({ "auth": user })
+  //     .then(data => {
+  //       // console.log(data);
+  //       if(data.ok && data.status === 201){          
+  //         this.setState({ error: '' });
+  //         return data.json();
+  //       } else {
+  //         this.setState({ error: 'User not found or password is invalid' });
+  //       }
+  //     })
+  //     .then(jwt => {
+  //       if(jwt) saveToken(jwt);
+  //       console.log('isAuthenticated:', !!isAuthenticated());
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
+  // login using async actions
+  
   onSubmitHandler = (e) => {
     e.preventDefault();
-    const user = {
-      "email": this.state.email.value,
-      "password": this.state.password.value
-    }
-
-    // clear any saved token
-    removeToken();
-
-    // login the user and save the jwt to local storage
-    login({ "auth": user })
-      .then(data => {
-        // console.log(data);
-        if(data.ok && data.status === 201){          
-          this.setState({ error: '' });
-          return data.json();
-        } else {
-          this.setState({ error: 'User not found or password is invalid' });
-        }
-      })
-      .then(jwt => {
-        if(jwt) saveToken(jwt);
-        console.log('isAuthenticated:', !!isAuthenticated());
-      })
-      .catch(err => console.log(err));
+    // const user = {
+    //   "email": this.state.email.value,
+    //   "password": this.state.password.value
+    // };
+    this.props.login(this.state.email.value, this.state.password.value);
   };
 
   onClickHandler = () => {
@@ -155,5 +168,12 @@ class Login extends React.Component {
       </div>
     );
   }
-} 
-export default Login;
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password) => dispatch(actions.login(email, password))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Login);

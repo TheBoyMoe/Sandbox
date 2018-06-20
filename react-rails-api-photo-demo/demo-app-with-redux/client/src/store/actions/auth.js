@@ -30,6 +30,11 @@ export const logout = () => {
 
 // async function which logs the user in
 export const login = (email, password) => {
+  const user = {
+    'email': email,
+    'password': password
+  };
+
   return (dispatch) => {
     // TODO
     dispatch(loginUser());

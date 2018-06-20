@@ -1,5 +1,6 @@
 // bundle exports
 export {
   login,
-  logout
+  logout,
+  signup
 } from './auth';

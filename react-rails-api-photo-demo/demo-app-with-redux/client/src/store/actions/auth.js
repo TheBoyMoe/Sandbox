@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import { removeToken } from '../../utilities/auth-helpers';
-import { signin } from '../../utilities/api-helpers';
+import { signin, register } from '../../utilities/api-helpers';
 
 const loginUser = () => {
   return {
@@ -18,6 +18,25 @@ const loginSuccess = (token) => {
 const loginFailure = (err) => {
   return {
     type: actionTypes.LOGIN_FAILURE,
+    error: err
+  };
+};
+
+const signupUser = () => {
+  return {
+    type: actionTypes.SIGNUP_USER
+  };
+};
+
+const signupSuccess = () => {
+  return {
+    type: actionTypes.SIGNUP_SUCCESS
+  };
+};
+
+const signupFailure = (err) => {
+  return {
+    type: actionTypes.SIGNUP_FAILURE,
     error: err
   };
 };
@@ -54,4 +73,42 @@ export const login = (email, password) => {
         dispatch(loginFailure(err));
       });
   };
+};
+
+export const signup = (name, email, password, password_confirmation) => {
+  const user = {
+    'name': name,
+    'email': email,
+    'password': password,
+    'password_confirmation': password_confirmation 
+  };
+
+  return (dispatch) => {
+    dispatch(signupUser());
+    register({'user': user})
+      .then(data => {
+        if(data && data.ok && data.status === 200){
+          dispatch(signupSuccess());
+          // account successfully created, log the user in and fetch the token
+          return signin({ 
+            'auth': { 'email': email, 'password': password }
+          });
+        }
+      })
+      .then(res => {
+        if(res.ok && res.status === 201){
+          return res.json();
+        } else {
+          dispatch(loginFailure({error: 'User is not found or password is invalid'}))
+        }
+      })
+      .then(token => {
+        console.log('token: ', token);
+        if(token) dispatch(loginSuccess(token));
+      })
+      .catch(err => {
+        dispatch(signupFailure({ error: 'User already registered'}));
+      });
+  };
+
 };

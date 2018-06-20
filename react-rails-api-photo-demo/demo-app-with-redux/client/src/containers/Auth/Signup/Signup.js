@@ -1,8 +1,11 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
-import { removeToken, saveToken, isAuthenticated } from '../../../utilities/auth-helpers';
-import { register, signin } from '../../../utilities/api-helpers';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
+
+// import { removeToken, saveToken, isAuthenticated } from '../../../utilities/auth-helpers';
+//  import { register, signin } from '../../../utilities/api-helpers';
 // import GenerateErrorMessage  from '../../../utilities/GenerageMessage';
 
 class Signup extends React.Component {
@@ -98,46 +101,53 @@ class Signup extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    const user = {
-      "name": this.state.name.value,
-      "email": this.state.email.value,
-      "password": this.state.password.value,
-      "password_confirmation": this.state.password_confirmation.value
-    };
+    this.props.signup(
+      this.state.name.value,
+      this.state.email.value,
+      this.state.password.value,
+      this.state.password_confirmation.value
+    )
 
-    removeToken();
+    // const user = {
+    //   "name": this.state.name.value,
+    //   "email": this.state.email.value,
+    //   "password": this.state.password.value,
+    //   "password_confirmation": this.state.password_confirmation.value
+    // };
+    
+    // removeToken();
 
-    // signup and log the user in if successful
-    register({ "user": user })
-      .then(data => {
-        // console.log(data);
-        if(data && data.ok){
-          if(data.status === 200){
-            this.setState({ error: ''});
-            return signin({ 
-              "auth": {"email": this.state.email.value, "password": this.state.password.value }
-            });
-          } else {
-            console.log('User already registered.');
-            // TODO redirect user to login page
-            this.setState({ error: 'User already registered'});
-          }
-        } else {
-          this.setState({ error: data.statusText });
-        }
-      })
-      .then(res => {
-        if(res.ok && res.status === 201){
-          return res.json();
-        } else {
-          this.setState({ error: res.statusText });
-        }
-      })
-      .then(jwt => {
-        if(jwt) saveToken(jwt);
-        console.log('isAuthenticated: ', !!isAuthenticated());
-      })
-      .catch(err => console.log(err));
+    //// signup and log the user in if successful
+    // register({ "user": user })
+    //   .then(data => {
+    //     // console.log(data);
+    //     if(data && data.ok){
+    //       if(data.status === 200){
+    //         this.setState({ error: ''});
+    //         return signin({ 
+    //           "auth": {"email": this.state.email.value, "password": this.state.password.value }
+    //         });
+    //       } else {
+    //         console.log('User already registered.');
+    //         // TODO redirect user to login page
+    //         this.setState({ error: 'User already registered'});
+    //       }
+    //     } else {
+    //       this.setState({ error: data.statusText });
+    //     }
+    //   })
+    //   .then(res => {
+    //     if(res.ok && res.status === 201){
+    //       return res.json();
+    //     } else {
+    //       this.setState({ error: res.statusText });
+    //     }
+    //   })
+    //   .then(jwt => {
+    //     if(jwt) saveToken(jwt);
+    //     console.log('isAuthenticated: ', !!isAuthenticated());
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   onClickHandler = () => {
@@ -243,5 +253,12 @@ class Signup extends React.Component {
       </div>
     );
   }
-}
-export default Signup;
+} 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (name, email, password, password_confirmation) => dispatch(actions.signup(name, email, password, password_confirmation))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Signup);

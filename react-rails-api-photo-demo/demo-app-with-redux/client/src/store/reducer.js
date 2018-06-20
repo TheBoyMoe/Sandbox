@@ -1,7 +1,6 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-  mobileMenuOpen: false,
   token: null
 };
 

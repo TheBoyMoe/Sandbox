@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 import Explore from './containers/Explore/Explore';
 import Collections from './containers/Collections/Collections';
 import Submission from './containers/Submission/Submission';

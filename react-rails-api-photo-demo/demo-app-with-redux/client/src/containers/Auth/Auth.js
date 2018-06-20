@@ -5,23 +5,19 @@ import Signup from './Signup/Signup';
 class Auth extends React.Component {
   state = {
     alreadyRegistered: true
-  }
+  };
 
   onClickHandler = () => {
     this.setState({
       alreadyRegistered: !this.state.alreadyRegistered
     })
-  }
-
-  onSubmitHandler = (data) => {
-    console.log(data)
-  }
+  };
   
   render(){
     let output = null;
     output = (this.state.alreadyRegistered)?
-      <Login clicked={ this.onClickHandler } submitted={ this.onSubmitHandler } /> :
-      <Signup clicked={ this.onClickHandler } submitted={ this.onSubmitHandler } />;
+      <Login clicked={ this.onClickHandler } /> :
+      <Signup clicked={ this.onClickHandler } />;
     
     return(
       <div>

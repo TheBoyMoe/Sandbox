@@ -1,8 +1,8 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
-import { removeToken, saveToken, isAuthenticated } from '../utilities/auth-helpers';
-import { signup, login } from '../utilities/api-helpers';
+import { removeToken, saveToken, isAuthenticated } from '../../../utilities/auth-helpers';
+import { register, signin } from '../../../utilities/api-helpers';
 // import GenerateErrorMessage  from '../../../utilities/GenerageMessage';
 
 class Signup extends React.Component {
@@ -108,13 +108,13 @@ class Signup extends React.Component {
     removeToken();
 
     // signup and log the user in if successful
-    signup({ "user": user })
+    register({ "user": user })
       .then(data => {
         // console.log(data);
         if(data && data.ok){
           if(data.status === 200){
             this.setState({ error: ''});
-            return login({ 
+            return signin({ 
               "auth": {"email": this.state.email.value, "password": this.state.password.value }
             });
           } else {

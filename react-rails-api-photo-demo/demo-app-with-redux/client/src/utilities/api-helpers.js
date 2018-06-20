@@ -1,4 +1,4 @@
-export const login = (data) => {
+export const signin = (data) => {
   return fetch('/user_token', {
     method: 'POST',
     headers: {
@@ -12,11 +12,11 @@ export const login = (data) => {
     .catch(err => console.log('Login error', err));
 };
 
-export const logout = () => { 
+export const signout = () => { 
   console.log('Logout');
 };
 
-export const signup = (user) => {
+export const register = (user) => {
   return fetch('/api/v1/users', {
     method: 'POST',
     headers: {

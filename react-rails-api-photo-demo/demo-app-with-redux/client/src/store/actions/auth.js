@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
-import { removeToken } from '../../containers/Auth/utilities/auth-helpers';
+import { removeToken } from '../../utilities/auth-helpers';
+import { signin } from '../../utilities/api-helpers';
 
 const loginUser = () => {
   return {
@@ -36,7 +37,21 @@ export const login = (email, password) => {
   };
 
   return (dispatch) => {
-    // TODO
     dispatch(loginUser());
+    signin({'auth': user})
+      .then(data => {
+        if(data.ok && data.status === 201){
+          return data.json();
+        } else {
+          dispatch(loginFailure({error: 'User is not found or password is invalid'}))
+        }
+      })
+      .then(token => {
+        console.log('token: ', token);
+        if(token) dispatch(loginSuccess(token));
+      })
+      .catch(err => {
+        dispatch(loginFailure(err));
+      });
   };
 };

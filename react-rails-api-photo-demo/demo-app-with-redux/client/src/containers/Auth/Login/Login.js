@@ -1,7 +1,5 @@
 import React from 'react';
 import Input from '../../../components/UI/input/input';
-import { login } from '../utilities/api-helpers';
-import { saveToken, isAuthenticated, removeToken } from '../utilities/auth-helpers';
 import { checkValidityOfInput } from '../utilities/validity';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
@@ -72,7 +70,7 @@ class Login extends React.Component {
   //   removeToken();
 
   //   // login the user and save the jwt to local storage
-  //   login({ "auth": user })
+  //   login({ "auth": user }) // api-helper
   //     .then(data => {
   //       // console.log(data);
   //       if(data.ok && data.status === 201){          
@@ -93,10 +91,6 @@ class Login extends React.Component {
   
   onSubmitHandler = (e) => {
     e.preventDefault();
-    // const user = {
-    //   "email": this.state.email.value,
-    //   "password": this.state.password.value
-    // };
     this.props.login(this.state.email.value, this.state.password.value);
   };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
@@ -19,6 +19,7 @@ class App extends Component {
         <Route path="/explore" component={ Explore } />
         <Route path="/auth" component={ Auth } />
         <Route path="/" component={ Home } />
+        <Redirect to="/" />
       </Switch>
     );
 
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path="/submission" component={ Submission } />
           <Route path="/logout" component={ Logout } />
           <Route path="/" component={ Home } />
+          <Redirect to="/" />
         </Switch>
       );
     }

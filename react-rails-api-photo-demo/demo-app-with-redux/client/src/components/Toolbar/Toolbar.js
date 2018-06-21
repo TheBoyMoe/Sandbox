@@ -5,7 +5,7 @@ import NavItem from './NavItem/NavItem';
 
 import './Toolbar.css';
 
-const toolbar = () => {
+const toolbar = (props) => {
   return(
     <header className="Toolbar">
       <Navbar collapseOnSelect>
@@ -21,7 +21,10 @@ const toolbar = () => {
             <NavItem link="/explore">Explore</NavItem>
             <NavItem link="/collections">Collections</NavItem>
             <NavItem link="/submission">Submit a Photo</NavItem>
-            <NavItem link="/auth">Login</NavItem>
+            {(!props.isAuth)?
+              <NavItem link="/auth">Login</NavItem> :
+              <NavItem link="/logout">Logout</NavItem>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

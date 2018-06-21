@@ -1,5 +1,6 @@
 import React from 'react';
 import Toolbar from '../../components/Toolbar/Toolbar';
+import { connect } from 'react-redux';
 
 import './Layout.css';
 
@@ -7,7 +8,7 @@ class Layout extends React.Component {
   render(){
     return (
       <div>
-        <Toolbar toggle={ this.toggleMenu }/>
+        <Toolbar isAuth={ this.props.isAuthenticated }/>
         <main className="Content container">
           { this.props.children }
         </main>
@@ -16,4 +17,10 @@ class Layout extends React.Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

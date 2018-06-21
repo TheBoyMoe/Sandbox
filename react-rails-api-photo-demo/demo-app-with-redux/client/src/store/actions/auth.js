@@ -71,7 +71,7 @@ export const login = (email, password) => {
       })
       .catch(err => {
         console.log('Login Error', err);
-        dispatch(loginFailure(err));
+        dispatch(loginFailure('Unknown error, try again'));
       });
   };
 };
@@ -113,4 +113,10 @@ export const signup = (name, email, password, password_confirmation) => {
       });
   };
 
+};
+
+export const reset = () => {
+  return {
+    type: actionTypes.RESET_STATE
+  };
 };

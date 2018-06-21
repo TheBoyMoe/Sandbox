@@ -7,3 +7,5 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
 export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const RESET_STATE = 'RESET_STATE';

@@ -36,6 +36,12 @@ const reducer = (state = initialState, action) => {
       token: null,
       error: action.error  
     };
+  case actionTypes.RESET_STATE:
+    return {
+      ...state,
+      token: null,
+      error: null
+    };
   default:
     return state;
   }

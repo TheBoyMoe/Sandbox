@@ -35,8 +35,8 @@ class Login extends React.Component {
       valid: false,
       touched: false
     },
-    formIsValid: false,
-    error: ''
+    formIsValid: false
+    // error: ''
   };
 
   onChangeHandler = (e, name) => {
@@ -94,7 +94,7 @@ class Login extends React.Component {
     this.props.login(this.state.email.value, this.state.password.value);
   };
 
-  onClickHandler = () => {
+  dismissMessageHandler = () => {
     const emailUpdate = {
       ...this.state.email,
       value: ''
@@ -105,20 +105,21 @@ class Login extends React.Component {
     }
     this.setState({
       email: emailUpdate,
-      password: passwordUpdate,
-      error: ''
-    })
+      password: passwordUpdate
+      // error: ''
+    });
+    this.props.dismissError();
   }
 
   render(){
     let errorMessage = null;
-    if(this.state.error) {
+    if(this.props.error) {
       errorMessage = (
         <div className="alert alert-danger" role="alert">
-          <button onClick={ this.onClickHandler } type="button" className="close" data-dismiss="alert">
+          <button onClick={ this.dismissMessageHandler } type="button" className="close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>{ this.state.error }</strong>
+          <strong>{ this.props.error }</strong>
         </div>
       );
     }
@@ -164,10 +165,17 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    login: (email, password) => dispatch(actions.login(email, password))
-  }
+    error: state.auth.error
+  };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password) => dispatch(actions.login(email, password)),
+    dismissError: () => dispatch(actions.reset())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -2,8 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   token: null,
-  error: null,
-  redirectPath: '/explore'
+  error: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,10 +24,21 @@ const reducer = (state = initialState, action) => {
       token: null,
       error: action.error
     };
+  case actionTypes.SIGNUP_USER:
+  case actionTypes.SIGNUP_SUCCESS:
+    return {
+      ...state,
+      error: null
+    };
+  case actionTypes.SIGNUP_FAILURE:
+    return {
+      ...state,
+      token: null,
+      error: action.error  
+    };
   default:
     return state;
   }
 };
-
 
 export default reducer;

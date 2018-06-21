@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { removeToken } from '../../utilities/auth-helpers';
+import { removeToken, saveToken } from '../../utilities/auth-helpers';
 import { signin, register } from '../../utilities/api-helpers';
 
 const loginUser = () => {
@@ -42,7 +42,7 @@ const signupFailure = (err) => {
 };
 
 export const logout = () => {
-  removeToken(); 
+  removeToken(); // delete token from sessionStorage
   return {
     type: actionTypes.LOGOUT_USER
   };
@@ -67,7 +67,10 @@ export const login = (email, password) => {
       })
       .then(token => {
         console.log('token: ', token);
-        if(token) dispatch(loginSuccess(token));
+        if(token) {
+          saveToken(token); // save token to sessionStorage
+          dispatch(loginSuccess(token)); // update app state
+        }
       })
       .catch(err => {
         console.log('Login Error', err);
@@ -105,7 +108,10 @@ export const signup = (name, email, password, password_confirmation) => {
       })
       .then(token => {
         console.log('token: ', token);
-        if(token) dispatch(loginSuccess(token));
+        if(token) {
+          saveToken(token);
+          dispatch(loginSuccess(token));
+        }
       })
       .catch(err => {
         console.log('Signup failure: ', err);

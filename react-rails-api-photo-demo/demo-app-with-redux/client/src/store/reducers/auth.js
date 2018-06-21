@@ -37,6 +37,7 @@ const reducer = (state = initialState, action) => {
       error: action.error  
     };
   case actionTypes.RESET_STATE:
+  case actionTypes.LOGOUT_USER:  
     return {
       ...state,
       token: null,

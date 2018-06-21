@@ -66,7 +66,7 @@ export const login = (email, password) => {
         }
       })
       .then(token => {
-        console.log('token: ', token);
+        // console.log('token: ', token);
         if(token) {
           saveToken(token); // save token to sessionStorage
           dispatch(loginSuccess(token)); // update app state

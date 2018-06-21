@@ -18,11 +18,11 @@ class App extends Component {
       <Switch>
         <Route path="/explore" component={ Explore } />
         <Route path="/auth" component={ Auth } />
-        <Route path="/" component={ Home } />
+        <Route path="/" exact component={ Home } />
         <Redirect to="/" />
       </Switch>
     );
-
+ 
     if(this.props.isAuthenticated) {
       routes = (
         <Switch>
@@ -30,11 +30,13 @@ class App extends Component {
           <Route path="/collections" component={ Collections } />
           <Route path="/submission" component={ Submission } />
           <Route path="/logout" component={ Logout } />
-          <Route path="/" component={ Home } />
+          <Route path="/auth" component={ Auth } />
+          <Route path="/" exact component={ Home } />
           <Redirect to="/" />
         </Switch>
       );
     }
+
     return(
       <div>
         <Layout>

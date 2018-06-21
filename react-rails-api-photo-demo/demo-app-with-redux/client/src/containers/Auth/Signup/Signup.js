@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
-import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 // import { removeToken, saveToken, isAuthenticated } from '../../../utilities/auth-helpers';
@@ -193,8 +194,15 @@ class Signup extends React.Component {
         </div>
       );
     }
+
+    // let authRedirect = null;
+    // if(this.props.isAuthenticated){
+    //   authRedirect = <Redirect to="/explore" />;
+    // }
+
     return (
       <div className="Signup">
+        {/* { authRedirect } */}
         { errorMessage }
         <h1 className="center">Sign Up</h1>
         <form onSubmit={ this.onSubmitHandler }>
@@ -256,7 +264,8 @@ class Signup extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.auth.error
+    error: state.auth.error,
+    // isAuthenticated: state.auth.token !== null
   }
 }
 

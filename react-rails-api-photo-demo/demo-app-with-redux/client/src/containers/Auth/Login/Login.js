@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import Input from '../../../components/UI/input/input';
 import { checkValidityOfInput } from '../utilities/validity';
-import { connect } from 'react-redux';
+
 import * as actions from '../../../store/actions/index';
 
 class Login extends React.Component {
@@ -112,6 +115,11 @@ class Login extends React.Component {
   }
 
   render(){
+    // let authRedirect = null;
+    // if(this.props.isAuthenticated){
+    //   authRedirect = <Redirect to="/explore" />;
+    // }
+
     let errorMessage = null;
     if(this.props.error) {
       errorMessage = (
@@ -126,6 +134,7 @@ class Login extends React.Component {
 
     return (
       <div className="Login">
+        {/* { authRedirect } */}
         { errorMessage }
         <h1 className="center">Login</h1>
 
@@ -167,7 +176,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.auth.error
+    error: state.auth.error,
+    //isAuthenticated: state.auth.token !== null
   };
 };
 

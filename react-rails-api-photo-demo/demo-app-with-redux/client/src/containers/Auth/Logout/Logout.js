@@ -5,6 +5,10 @@ import { Redirect } from 'react-router-dom';
 import * as actions from '../../../store/actions/index';
 
 class Logout extends React.Component {
+  componentDidMount(){
+    this.props.logout();
+  }
+
   render(){
     return <Redirect to="/" />;
   }
@@ -12,7 +16,7 @@ class Logout extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: dispatch(actions.logout())
+    logout: () => dispatch(actions.logout())
   };
 };
 

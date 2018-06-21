@@ -8,6 +8,7 @@ import Collections from './containers/Collections/Collections';
 import Submission from './containers/Submission/Submission';
 import Auth from './containers/Auth/Auth';
 import Home from './containers/Home/Home';
+import Logout from './containers/Auth/Logout/Logout';
 
 class App extends Component {
   render(){
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/collections" component={ Collections } />
             <Route path="/submission" component={ Submission } />
             <Route path="/auth" component={ Auth } />
+            <Route path="/logout" component={ Logout } />
             <Route path="/" component={ Home } />
           </Switch>
         </Layout>

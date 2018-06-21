@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       token: null,
-      error: state.error
+      error: action.error
     };
   default:
     return state;

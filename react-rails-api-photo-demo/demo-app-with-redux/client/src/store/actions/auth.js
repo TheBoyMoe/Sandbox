@@ -62,7 +62,7 @@ export const login = (email, password) => {
         if(data.ok && data.status === 201){
           return data.json();
         } else {
-          dispatch(loginFailure({error: 'User is not found or password is invalid'}))
+          dispatch(loginFailure('User was not found or password is invalid'));
         }
       })
       .then(token => {
@@ -70,6 +70,7 @@ export const login = (email, password) => {
         if(token) dispatch(loginSuccess(token));
       })
       .catch(err => {
+        console.log('Login Error', err);
         dispatch(loginFailure(err));
       });
   };
@@ -99,7 +100,7 @@ export const signup = (name, email, password, password_confirmation) => {
         if(res.ok && res.status === 201){
           return res.json();
         } else {
-          dispatch(loginFailure({error: 'User is not found or password is invalid'}))
+          dispatch(loginFailure('User was not found or password is invalid'));
         }
       })
       .then(token => {
@@ -107,7 +108,8 @@ export const signup = (name, email, password, password_confirmation) => {
         if(token) dispatch(loginSuccess(token));
       })
       .catch(err => {
-        dispatch(signupFailure({ error: 'User already registered'}));
+        console.log('Signup failure: ', err);
+        dispatch(signupFailure('User is already registered'));
       });
   };
 

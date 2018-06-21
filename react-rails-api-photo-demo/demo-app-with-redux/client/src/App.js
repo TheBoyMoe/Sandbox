@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './App.css';
 
 import Layout from './containers/Layout/Layout';
@@ -11,18 +12,31 @@ import Home from './containers/Home/Home';
 import Logout from './containers/Auth/Logout/Logout';
 
 class App extends Component {
+  
   render(){
+    let routes = (
+      <Switch>
+        <Route path="/explore" component={ Explore } />
+        <Route path="/auth" component={ Auth } />
+        <Route path="/" component={ Home } />
+      </Switch>
+    );
+
+    if(this.props.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route path="/explore" component={ Explore } />
+          <Route path="/collections" component={ Collections } />
+          <Route path="/submission" component={ Submission } />
+          <Route path="/logout" component={ Logout } />
+          <Route path="/" component={ Home } />
+        </Switch>
+      );
+    }
     return(
       <div>
         <Layout>
-          <Switch>
-            <Route path="/explore" component={ Explore } />
-            <Route path="/collections" component={ Collections } />
-            <Route path="/submission" component={ Submission } />
-            <Route path="/auth" component={ Auth } />
-            <Route path="/logout" component={ Logout } />
-            <Route path="/" component={ Home } />
-          </Switch>
+          { routes }
         </Layout>
       </div>
     );
@@ -30,4 +44,10 @@ class App extends Component {
 
 }
  
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(App));

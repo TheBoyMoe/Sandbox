@@ -108,7 +108,7 @@ class Login extends React.Component {
       password: passwordUpdate
       // error: ''
     });
-    this.props.dismissError();
+    this.props.resetError();
   }
 
   render(){
@@ -174,7 +174,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (email, password) => dispatch(actions.login(email, password)),
-    dismissError: () => dispatch(actions.reset())
+    resetError: () => dispatch(actions.reset())
   };
 };
 

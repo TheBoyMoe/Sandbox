@@ -42,7 +42,7 @@ const signupFailure = (err) => {
 };
 
 export const logout = () => {
-  removeToken();
+  removeToken(); 
   return {
     type: actionTypes.LOGOUT_USER
   };

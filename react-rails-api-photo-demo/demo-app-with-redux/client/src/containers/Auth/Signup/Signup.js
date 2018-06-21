@@ -69,8 +69,7 @@ class Signup extends React.Component {
       valid: false,
       touched: false
     },
-    formIsValid: false,
-    error: ''
+    formIsValid: false
   };
 
   onChangeHandler = (e, name) => {
@@ -150,7 +149,7 @@ class Signup extends React.Component {
     //   .catch(err => console.log(err));
   };
 
-  onClickHandler = () => {
+  dismissErrorHandler = () => {
     const nameUpdate = {
       ...this.state.name,
       value: ''
@@ -171,14 +170,14 @@ class Signup extends React.Component {
       name: nameUpdate,
       email: emailUpdate,
       password: passwordUpdate,
-      password_confirmation: passwordConfirmationUpdate,
-      error: ''
-    })
+      password_confirmation: passwordConfirmationUpdate
+    });
+    this.props.resetError();
   }
 
   render(){
     let errorMessage = null;
-    if(this.state.error) {
+    if(this.props.error) {
       // errorMessage = <GenerateErrorMessage message={this.state.error} styles={['alert', 'alert-danger']} />;
       // errorMessage = (
       //   <ErrorBoundary>
@@ -187,10 +186,10 @@ class Signup extends React.Component {
       // )
       errorMessage = (
         <div className="alert alert-danger" role="alert">
-          <button onClick={ this.onClickHandler } type="button" className="close" data-dismiss="alert">
+          <button onClick={ this.dismissErrorHandler } type="button" className="close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>{ this.state.error }</strong>
+          <strong>{ this.props.error }</strong>
         </div>
       );
     }
@@ -253,12 +252,19 @@ class Signup extends React.Component {
       </div>
     );
   }
-} 
+}
+
+const mapStateToProps = (state) => {
+  return {
+    error: state.auth.error
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signup: (name, email, password, password_confirmation) => dispatch(actions.signup(name, email, password, password_confirmation))
+    signup: (name, email, password, password_confirmation) => dispatch(actions.signup(name, email, password, password_confirmation)),
+    resetError: () => dispatch(actions.reset())
   };
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

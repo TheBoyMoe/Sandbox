@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { removeToken, saveToken } from '../../utilities/auth-helpers';
+import { removeToken, saveToken, isAuthenticated } from '../../utilities/auth-helpers';
 import { signin, register } from '../../utilities/api-helpers';
 
 const loginUser = () => {
@@ -9,6 +9,7 @@ const loginUser = () => {
 };
 
 const loginSuccess = (token) => {
+  // saveToken(token); // save token to sessionStorage
   return {
     type: actionTypes.LOGIN_SUCCESS,
     token: token
@@ -124,5 +125,13 @@ export const signup = (name, email, password, password_confirmation) => {
 export const reset = () => {
   return {
     type: actionTypes.RESET_STATE
+  };
+};
+
+// log the user in if they have a token saved to sessionStorage
+export const checkAuthState = () => {
+  return (dispatch) => {
+    const token = isAuthenticated();
+    (token)? dispatch(loginSuccess(token)) : dispatch(logout()); 
   };
 };

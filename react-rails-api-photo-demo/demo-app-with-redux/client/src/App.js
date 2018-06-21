@@ -10,9 +10,13 @@ import Submission from './containers/Submission/Submission';
 import Auth from './containers/Auth/Auth';
 import Home from './containers/Home/Home';
 import Logout from './containers/Auth/Logout/Logout';
+import * as actions from './store/actions/index';
 
 class App extends Component {
-  
+  componentDidMount(){
+    this.props.autoLogin();
+  }
+
   render(){
     let routes = (
       <Switch>
@@ -54,4 +58,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    autoLogin: () => dispatch(actions.checkAuthState())
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

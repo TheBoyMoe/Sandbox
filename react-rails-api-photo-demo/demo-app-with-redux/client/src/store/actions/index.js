@@ -3,5 +3,6 @@ export {
   login,
   logout,
   signup,
-  reset
+  reset,
+  checkAuthState
 } from './auth';

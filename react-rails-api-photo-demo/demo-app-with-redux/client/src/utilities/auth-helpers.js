@@ -11,7 +11,7 @@ export const removeToken = () => {
 };
 
 export const isAuthenticated = () => {
-  if(typeof window == 'undefined') return false;
+  if(typeof window === 'undefined') return false;
   
   // check if the user has a saved token
   if(sessionStorage.getItem('jwt'))

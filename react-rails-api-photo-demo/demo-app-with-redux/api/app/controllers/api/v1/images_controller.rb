@@ -34,7 +34,7 @@ module Api
       private
 
       def image_params
-        params.require(:image).permit(:title, :path)
+        params.require(:image).permit(:title, :path, :photo)
       end
 
       def set_user

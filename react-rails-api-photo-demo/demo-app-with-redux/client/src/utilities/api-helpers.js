@@ -29,3 +29,12 @@ export const register = (user) => {
     .then(res => res)
     .catch(err => console.log('Signup error:', err));
 };
+
+export const saveImage = (data) => {
+  return fetch('/api/v1/images', {
+    method: 'POST',
+    body: data
+  })
+    .then(res => res)
+    .catch(err => console.log('images#create error', err));
+};

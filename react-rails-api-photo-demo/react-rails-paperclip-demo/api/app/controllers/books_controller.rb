@@ -43,8 +43,18 @@ class BooksController < ApplicationController
       @book = Book.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def book_params
-      params.require(:book).permit([:title, :description, covers_attributes: %i(id photo _destory)])
-    end
+     # Only allow a trusted parameter "white list" through.
+  def book_params
+    params.require(:book).permit(
+      [
+        :title,
+        :description,
+        covers_attributes: %I[
+          id
+          photo
+          _destroy
+        ]
+      ]
+    )
+  end
 end

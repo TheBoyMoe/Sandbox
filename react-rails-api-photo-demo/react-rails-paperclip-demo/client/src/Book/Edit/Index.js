@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import BookForm from '../Form';
+import BookForm from '../Form/Index';
 
-class BookNew extends Component {
+class BookEdit extends Component {
   render() {
     return (
-      <div className="BookNew col-md-8 col-md-offset-2">
-        <h2>New Book</h2>
+      <div className="BookEdit col-md-8 col-md-offset-2">
+        <h2>Edit Book</h2>
         <BookForm 
           history={this.props.history} 
           match={this.props.match} />
@@ -14,4 +14,4 @@ class BookNew extends Component {
   }
 }
 
-export default BookNew;
+export default BookEdit;

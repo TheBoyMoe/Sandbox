@@ -13,7 +13,7 @@ class Book < ApplicationRecord
       errors: errors,
       cover_photos: covers.map do |x|
         {
-          url: x.photo.url.absolute_url,
+          url: "http://localhost:3000#{x.photo.url}",
           name: x.photo_file_name,
           id: x.id
         }

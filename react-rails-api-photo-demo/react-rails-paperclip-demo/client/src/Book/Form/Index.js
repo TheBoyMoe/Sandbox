@@ -175,8 +175,8 @@ class BookForm extends Component {
           }
           role="progressbar"
           aria-valuenow={this.state.submitFormProgress}
-          areaValuemin="0"
-          areaValuemax="100"
+          areavaluemin="0"
+          areavaluemax="100"
           style={{ width: this.state.submitFormProgress + '%' }}>
           {this.state.submitFormProgress}% Complete
         </div>

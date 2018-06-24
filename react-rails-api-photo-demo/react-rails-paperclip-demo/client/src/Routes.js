@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, HashRouter as Router, Route } from 'react-router-dom';
+import { Switch, Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 
-import BookIndex from './Book/Index';
-import BookNew from './Book/New';
-import BookEdit from './Book/Edit';
+import BookIndex from './Book/Index/Index';
+import BookNew from './Book/New/Index';
+import BookEdit from './Book/Edit/Index';
 import NotFound from './NotFound';
 
 const history = createBrowserHistory();

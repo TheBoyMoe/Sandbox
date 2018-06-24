@@ -31,8 +31,15 @@ export const register = (user) => {
 };
 
 export const saveImage = (data) => {
+  console.log(data);
   return fetch('/api/v1/images', {
     method: 'POST',
+    headers: {
+      // 'Content-Type': 'multipart/form-data'
+      // 'Content-Type': 'image/jpeg'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     body: data
   })
     .then(res => res)

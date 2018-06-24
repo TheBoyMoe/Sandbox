@@ -9,6 +9,7 @@ module Api
       end
 
       def create
+        # byebug
         @image = @user.images.new(image_params)
         if @image.save
           render json: @image, status: :created
@@ -34,7 +35,7 @@ module Api
       private
 
       def image_params
-        params.require(:image).permit(:title, :path, :photo)
+        params.require(:image).permit(:title, :path, :file)
       end
 
       def set_user

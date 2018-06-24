@@ -10,26 +10,39 @@ class Submission extends React.Component {
 
   onFileUploadHandler = (e) => {
     const file = e.target.files[0];
-    this.setState({
-      ...this.state,
-      image: file
-    });
+    const reader = new FileReader();
+    reader.onloadend = () => { 
+      // console.log('Result: ', reader.result) 
+      this.setState({
+        ...this.state,
+        image: reader.result
+      });
+    }
+    reader.readAsDataURL(file);
+
   };
-  
+
   onSubmitHandler = (e) => {
     e.preventDefault();
-    const title = this.state.title;
-    const image = this.state.image;
+    // const title = this.state.title;
+    // const image = this.state.image;
 
     // create form data
-    const formData = new FormData();
-    formData.append('photo', image);
-    formData.append('title', title);
-    console.log(formData);
+    // const formData = new FormData();
+    // formData.append('file', image);
+    // formData.append('path', '/path/to/file')
+    // formData.append('title', title);
+
     // submit the data to images#create
-    saveImage(formData)
-    .then(res => console.log('Upload response', res))
-    .catch(err => console.log('Upload error', err));
+    saveImage({
+      'image': {
+        'title': this.state.title,
+        'file': this.state.image,
+        'path': '/path/to file'
+      }
+    })
+      .then(res => console.log('Upload response', res))
+      .catch(err => console.log('Upload error', err));
   };
 
   onChangeHandler = (e) => {
@@ -40,30 +53,30 @@ class Submission extends React.Component {
   };
 
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="container">
         <h1>Submission Page</h1>
         <p>Add a photo, and share it with our community.</p>
-        <form onSubmit={ this.onSubmitHandler }>
-          <Input 
+        <form onSubmit={this.onSubmitHandler}>
+          <Input
             name="title"
             type="text"
-            value={ this.state.title }
-            changed={ this.onChangeHandler }
+            value={this.state.title}
+            changed={this.onChangeHandler}
             label="Title"
             placeholder="Add a title"
           />
-        
+
           <Input
-            name="photo" 
+            name="file"
             type="file"
-            changed={ this.onFileUploadHandler }
+            changed={this.onFileUploadHandler}
             accept="image/*" />
 
           <Input type="submit" value="Submit" />
         </form>
-      </div> 
+      </div>
     );
   }
 }

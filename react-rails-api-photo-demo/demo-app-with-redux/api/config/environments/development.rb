@@ -28,7 +28,9 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = :local # active storage
+
+  # Paperclip.options[:command_path] = '/usr/bin/convert/'
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

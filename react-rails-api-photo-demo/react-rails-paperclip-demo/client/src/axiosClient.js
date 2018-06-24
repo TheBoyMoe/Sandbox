@@ -1,6 +1,6 @@
 const axios = require('axios');
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://localhost:7000'
 });
 
 export default axiosClient;

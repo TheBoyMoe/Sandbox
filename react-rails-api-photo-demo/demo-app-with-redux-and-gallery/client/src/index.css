@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* app wide styles */
+.center {
+  text-align: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  margin-top: 40px;
+}

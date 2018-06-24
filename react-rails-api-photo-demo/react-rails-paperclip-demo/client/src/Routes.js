@@ -1,5 +1,3 @@
-// src/Routes.js
-
 import React from 'react';
 import { Switch, HashRouter as Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -10,6 +8,7 @@ import BookEdit from './Book/Edit';
 import NotFound from './NotFound';
 
 const history = createBrowserHistory();
+
 const Routes = () =>
   <Router history={history}>
     <Switch>

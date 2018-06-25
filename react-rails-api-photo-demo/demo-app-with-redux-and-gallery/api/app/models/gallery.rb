@@ -12,7 +12,7 @@ class Gallery < ApplicationRecord
       errors: errors,
       image_files: images.map do |image|
         {
-          url: "http://localhost:6999#{image.file.url}",
+          url: "http://localhost:6999/api/v1#{image.file.url}",
           name: image.file_file_name,
           id: image.id
         }

@@ -19,10 +19,9 @@ module Api
       # POST /galleries
       # POST /galleries.json
       def create
-        byebug
         @gallery = Gallery.new(gallery_params)
         if @gallery.save
-          render :show, status: :created, location: @gallery
+          render json: @gallery, status: :created, location: @gallery
         else
           render json: @gallery.errors, status: :unprocessable_entity
         end
@@ -32,7 +31,8 @@ module Api
       # PATCH/PUT /galleries/1.json
       def update
         if @gallery.update(gallery_params)
-          render :show, status: :ok, location: @gallery
+          # render :show, status: :ok, location: @gallery
+          render json: @gallery
         else
           render json: @gallery.errors, status: :unprocessable_entity
         end
@@ -42,6 +42,10 @@ module Api
       # DELETE /galleries/1.json
       def destroy
         @gallery.destroy
+      end
+
+      # FIXME gallery ceation fails without this 
+      def gallery_url(arg)
       end
 
       private

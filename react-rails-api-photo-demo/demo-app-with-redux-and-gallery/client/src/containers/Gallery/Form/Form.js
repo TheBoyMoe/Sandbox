@@ -294,14 +294,16 @@ class GalleryForm extends Component {
         }
       })
       .then(response => {
+        console.log('RESPONSE: ', response);
         this.setState({
           didFormSubmissionComplete: true
         });
         this.props.history.push('/galleries');
       })
       .catch(error => {
+        console.log('Submit Error', error);
         let { gallery } = this.state;
-        gallery.errors = error.response.data;
+        gallery.errors = error.response.data; // depends upon axios
         this.setState({
           isSubmittingForm: false,
           submitFormProgress: 0,

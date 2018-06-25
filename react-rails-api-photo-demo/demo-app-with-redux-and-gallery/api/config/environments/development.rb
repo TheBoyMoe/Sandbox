@@ -31,6 +31,7 @@ Rails.application.configure do
   # config.active_storage.service = :local # active storage
 
   Paperclip.options[:command_path] = '/usr/bin/convert/'
+  config.action_controller.asset_host = 'http://localhost:6999' # FIXME
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -14,7 +14,6 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    byebug
     @book = Book.new(book_params)
 
     if @book.save
@@ -38,6 +37,10 @@ class BooksController < ApplicationController
     @book.destroy
   end
 
+  def book_url(arg)
+    byebug
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -45,17 +48,17 @@ class BooksController < ApplicationController
     end
 
      # Only allow a trusted parameter "white list" through.
-  def book_params
-    params.require(:book).permit(
-      [
-        :title,
-        :description,
-        covers_attributes: %I[
-          id
-          photo
-          _destroy
+    def book_params
+      params.require(:book).permit(
+        [
+          :title,
+          :description,
+          covers_attributes: %I[
+            id
+            photo
+            _destroy
+          ]
         ]
-      ]
-    )
-  end
+      )
+    end
 end

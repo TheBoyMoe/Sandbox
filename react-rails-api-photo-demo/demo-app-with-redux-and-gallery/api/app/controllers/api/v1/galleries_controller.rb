@@ -7,16 +7,19 @@ module Api
       # GET /galleries.json
       def index
         @galleries = Gallery.all
+        render json: @galleries
       end
 
       # GET /galleries/1
       # GET /galleries/1.json
       def show
+        render json: @gallery
       end
 
       # POST /galleries
       # POST /galleries.json
       def create
+        byebug
         @gallery = Gallery.new(gallery_params)
         if @gallery.save
           render :show, status: :created, location: @gallery
@@ -51,7 +54,7 @@ module Api
             [
               :title,
               :description,
-              images_attributes: %i(id file)
+              images_attributes: %i(id file _destroy)
             ]
           )
         end

@@ -5,12 +5,13 @@ import './App.css';
 
 import Layout from './containers/Layout/Layout';
 import Explore from './containers/Explore/Explore';
-import Collections from './containers/Collections/Collections';
-import Submission from './containers/Submission/Submission';
+// import Collections from './containers/Collections/Collections';
+// import Submission from './containers/Submission/Submission';
 import Auth from './containers/Auth/Auth';
 import Home from './containers/Home/Home';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
+import GalleryNew from './containers/Gallery/New/New';
 
 class App extends Component {
   componentDidMount(){
@@ -31,8 +32,9 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/explore" component={ Explore } />
-          <Route path="/collections" component={ Collections } />
-          <Route path="/submission" component={ Submission } />
+          <Route path="/gallery/new" component={ GalleryNew } />
+          {/* <Route path="/collections" component={ Collections } /> */}
+          {/* <Route path="/submission" component={ Submission } /> */}
           <Route path="/logout" component={ Logout } />
           <Route path="/auth" component={ Auth } />
           <Route path="/" exact component={ Home } />

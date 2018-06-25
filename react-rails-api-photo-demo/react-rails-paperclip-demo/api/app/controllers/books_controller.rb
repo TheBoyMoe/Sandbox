@@ -14,6 +14,7 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
+    byebug
     @book = Book.new(book_params)
 
     if @book.save

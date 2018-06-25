@@ -19,8 +19,9 @@ const toolbar = (props) => {
           <Nav pullRight>
             <NavItem link="/" exact>Home</NavItem>
             <NavItem link="/explore">Explore</NavItem>
-            {(props.isAuth)? <NavItem link="/collections">Collections</NavItem> : null}
-            {(props.isAuth)? <NavItem link="/submission">Submit a Photo</NavItem> : null}
+            {/* {(props.isAuth)? <NavItem link="/collections">Collections</NavItem> : null} */}
+            {/* {(props.isAuth)? <NavItem link="/submission">Submit a Photo</NavItem> : null} */}
+            {(props.isAuth)? <NavItem link="/gallery/new">New Gallery</NavItem> : null}
             {(!props.isAuth)?
               <NavItem link="/auth">Login</NavItem> :
               <NavItem link="/logout">Logout</NavItem>

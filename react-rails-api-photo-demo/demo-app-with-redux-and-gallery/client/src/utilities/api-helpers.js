@@ -1,11 +1,12 @@
 export const signin = (data) => {
-  return fetch('/user_token', {
+  // FIXME '/user_token'
+  return fetch('http://localhost:6999/user_token', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+    // credentials: 'include', // FIXME
     body: JSON.stringify(data)
   })
     .then(res => res)
@@ -23,7 +24,7 @@ export const register = (user) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+    // credentials: 'include', // FIXME
     body: JSON.stringify(user)
   })
     .then(res => res)

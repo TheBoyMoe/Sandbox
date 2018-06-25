@@ -53,7 +53,7 @@ class GalleryIndex extends React.Component {
   renderImageGallery = () => {
     const images = this.randomizeGallery();
     return images.map(image => {
-      return (<li key={ image.id }>
+      return (<li className="image" key={ image.id }>
           <img src={ image.url } alt={ image.name }/>
         </li>
       );
@@ -64,7 +64,7 @@ class GalleryIndex extends React.Component {
     return(
       <div className="GalleryIndex">
         <h1>Gallery</h1>
-        <ul>
+        <ul className="gallery">
           { this.renderImageGallery() }
         </ul>
       </div>  

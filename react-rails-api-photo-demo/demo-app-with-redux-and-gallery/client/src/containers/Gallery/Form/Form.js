@@ -298,7 +298,7 @@ class GalleryForm extends Component {
         this.setState({
           didFormSubmissionComplete: true
         });
-        this.props.history.push('/galleries');
+        this.props.history.push('/gallery');
       })
       .catch(error => {
         console.log('Submit Error', error);

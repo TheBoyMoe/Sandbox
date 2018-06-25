@@ -1,6 +1,4 @@
 class Cover < ApplicationRecord
-  include Rails.application.routes.url_helpers
-
   belongs_to :book, inverse_of: :covers
   has_attached_file \
     :photo,

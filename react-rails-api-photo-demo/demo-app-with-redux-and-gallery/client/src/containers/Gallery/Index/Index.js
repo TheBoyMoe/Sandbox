@@ -11,7 +11,7 @@ class GalleryIndex extends React.Component {
   componentDidMount(){
     axiosClient.get('/galleries')
       .then(res => {
-        console.log(res.data); // response depends on axios
+        // console.log(res.data); // response depends on axios
         this.setState({ galleries: res.data });
       });    
   }
@@ -28,12 +28,44 @@ class GalleryIndex extends React.Component {
     )
   }
 
+  flattenGallery = () => {
+    const galleries = this.state.galleries;
+    const images = [];
+    galleries.forEach((gallery) => {
+      gallery.image_files.forEach((image) => {
+        images.push(image);
+      })
+    })
+    return images;
+  }
+
+  randomizeGallery = () => {
+    const images = this.flattenGallery();
+    const temp = [];
+    while(images.length !== 0){
+      const i = Math.floor(Math.random() * images.length);
+      temp.push(images[i]);
+      images.splice(i, 1);
+    }
+    return temp;
+  }
+
+  renderImageGallery = () => {
+    const images = this.randomizeGallery();
+    return images.map(image => {
+      return (<li key={ image.id }>
+          <img src={ image.url } alt={ image.name }/>
+        </li>
+      );
+    });
+  }
+
   render(){
     return(
       <div className="GalleryIndex">
         <h1>Gallery</h1>
         <ul>
-          { this.renderGalleryList() }
+          { this.renderImageGallery() }
         </ul>
       </div>  
     );

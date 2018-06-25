@@ -18,7 +18,7 @@ const toolbar = (props) => {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavItem link="/" exact>Home</NavItem>
-            <NavItem link="/explore">Explore</NavItem>
+            <NavItem link="/gallery">Gallery</NavItem>
             {/* {(props.isAuth)? <NavItem link="/collections">Collections</NavItem> : null} */}
             {/* {(props.isAuth)? <NavItem link="/submission">Submit a Photo</NavItem> : null} */}
             {(props.isAuth)? <NavItem link="/gallery/new">New Gallery</NavItem> : null}

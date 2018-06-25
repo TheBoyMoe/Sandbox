@@ -12,6 +12,7 @@ import Home from './containers/Home/Home';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 import GalleryNew from './containers/Gallery/New/New';
+import GalleryIndex from './containers/Gallery/Index/Index';
 
 class App extends Component {
   componentDidMount(){
@@ -21,7 +22,7 @@ class App extends Component {
   render(){
     let routes = (
       <Switch>
-        <Route path="/explore" component={ Explore } />
+        <Route path="/gallery" component={ GalleryIndex } />
         <Route path="/auth" component={ Auth } />
         <Route path="/" exact component={ Home } />
         <Redirect to="/" />
@@ -31,8 +32,8 @@ class App extends Component {
     if(this.props.isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/explore" component={ Explore } />
           <Route path="/gallery/new" component={ GalleryNew } />
+          <Route path="/gallery" component={ GalleryIndex } />
           {/* <Route path="/collections" component={ Collections } /> */}
           {/* <Route path="/submission" component={ Submission } /> */}
           <Route path="/logout" component={ Logout } />

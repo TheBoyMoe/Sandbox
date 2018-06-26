@@ -75,6 +75,10 @@ class ShowGallery extends React.Component {
     }, () => console.log('STATE', this.state));
   }
 
+  handleBack = () => {
+    this.props.history.push('/gallery');
+  }
+
   // TODO display messsage when gallery not found
   render(){
     let redirect = null;
@@ -97,6 +101,12 @@ class ShowGallery extends React.Component {
             onClick={() => this.handleRemove(this.state.gallery.id)}
             className="btn btn-danger">
             Delete
+          </button>
+          &nbsp;
+          <button
+            onClick={() => this.handleBack()}
+            className="btn btn-success">
+            Back
           </button>
         </div>
         <ul className="gallery">

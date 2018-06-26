@@ -44,10 +44,11 @@ class GalleryIndex extends React.Component {
     const galleries = this.state.galleries;
     const images = [];
     galleries.forEach((gallery) => {
+      const id = gallery.id;
       gallery.image_files.forEach((image) => {
-        images.push(image);
+        images.push({ galleryId: id, image: image });
       })
-    })
+    });
     return images;
   }
 
@@ -64,9 +65,12 @@ class GalleryIndex extends React.Component {
 
   renderImageGallery = () => {
     const images = this.randomizeGallery();
-    return images.map(image => {
-      return (<li className="image" key={ image.id }>
-          <img src={ image.url } alt={ image.name }/>
+    return images.map(obj => {
+
+      return (<li className="image" key={ obj.image.id }>
+          <a href={`/gallery/${obj.galleryId}`}>
+            <img src={ obj.image.url } alt={ obj.image.name }/>
+          </a>
         </li>
       );
     });

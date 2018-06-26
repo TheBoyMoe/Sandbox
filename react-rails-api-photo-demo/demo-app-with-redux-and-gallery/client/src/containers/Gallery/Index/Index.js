@@ -81,19 +81,29 @@ class GalleryIndex extends React.Component {
 
   renderImageGallery = () => {
     const galleries = this.state.galleries;
-    const images = [];
+    let images = [];
     galleries.forEach((gallery) => {
       images.push({galleryId: gallery.id, image: gallery.image_files[0]})
     })
+    images = images.sort(this.reverseImagesOrder);
+
     return images.map(obj => {
-      return (<li className="image" key={ obj.galleryId }>
-            <a href={`/gallery/${obj.galleryId}`}>
-              <img src={ obj.image.url } alt={ obj.image.name }/>
-            </a>
-          </li>
-        );
+      if (obj.image) {
+        return (<li className="image" key={ obj.galleryId }>
+              <a href={`/gallery/${obj.galleryId}`}>
+                <img src={ obj.image.url } alt={ obj.image.name }/>
+              </a>
+            </li>
+          );
+      }
     })
   };
+
+  reverseImagesOrder = (a, b) => {
+    if(a.galleryId < b.galleryId) return 1;
+    if(a.galleryId > b.galleryId) return -1;
+    return 0;
+  }
 
   render(){
     return(

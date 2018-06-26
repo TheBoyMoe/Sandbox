@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
+
 import axiosClient from '../../../axiosClient';
 
 class ShowGallery extends React.Component {
@@ -8,6 +10,7 @@ class ShowGallery extends React.Component {
       title: '',
       description: '',
       image_files: [],
+      match: true,
       errors: {}
     }
   }
@@ -23,6 +26,7 @@ class ShowGallery extends React.Component {
               title: res.data.title,
               description: res.data.description,
               image_files: res.data.image_files,
+              match: true,
               errors: {}
             }
           }, () => console.log(this.state))
@@ -31,6 +35,7 @@ class ShowGallery extends React.Component {
           console.log(err.response.status, err.response.statusText);
           const gallery = {
             ...this.state.gallery,
+            match: false,
             errors: { 
               status: err.response.status, 
               message: err.response.statusText 
@@ -38,7 +43,7 @@ class ShowGallery extends React.Component {
           }
           this.setState({
             gallery: gallery,
-            }, () => { console.log('Error fetching gallery', this.state) }
+            }, () => console.log('Error fetching gallery', this.state)
           );
         });
     }
@@ -54,8 +59,13 @@ class ShowGallery extends React.Component {
   }
 
   render(){
+    let redirect = null;
+    if(!this.state.gallery.match)
+      redirect = <Redirect to="/gallery" />;
+
     return(
       <div>
+        { redirect }
         <h1>{ this.state.gallery.title }</h1>
         <p>{ this.state.gallery.description }</p>
         <ul className="gallery">

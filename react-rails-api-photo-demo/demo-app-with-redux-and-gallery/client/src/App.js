@@ -35,8 +35,8 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/gallery/:id/edit" component={ GalleryEdit } />
-          <Route path="/gallery/:id" component={ GalleryShow } />
           <Route path="/gallery/new" component={ GalleryNew } />
+          <Route path="/gallery/:id" component={ GalleryShow } />
           <Route path="/gallery" component={ GalleryIndex } />
           {/* <Route path="/collections" component={ Collections } /> */}
           {/* <Route path="/submission" component={ Submission } /> */}

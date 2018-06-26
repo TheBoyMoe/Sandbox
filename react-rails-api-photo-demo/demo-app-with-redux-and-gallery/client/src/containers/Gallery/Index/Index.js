@@ -5,15 +5,27 @@ import './Index.css';
 
 class GalleryIndex extends React.Component {
   state = {
+    isMounted: false,
     galleries: []
   }
 
   componentDidMount(){
+    this.setState({
+      isMounted: true
+    }, this.fetchGalleries())
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
+  }
+  
+  fetchGalleries = () => {
     axiosClient.get('/galleries')
       .then(res => {
-        // console.log(res.data); // response depends on axios
-        this.setState({ galleries: res.data });
-      });    
+        if(this.state.isMounted)
+          this.setState({ galleries: res.data });
+      })
+      .catch(err => console.log('Error fetching galleries', err));
   }
 
   renderGalleryList = () => {

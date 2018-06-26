@@ -17,7 +17,6 @@ class ShowGallery extends React.Component {
     if(id) {
       axiosClient.get(`/galleries/${id}`)
         .then(res => {
-          console.log(res);
           this.setState({
             gallery: {
               id: res.data.id,
@@ -26,7 +25,7 @@ class ShowGallery extends React.Component {
               image_files: res.data.image_files,
               errors: {}
             }
-          })
+          }, () => console.log(this.state))
         })
         .catch(err => {
           console.log(err.response.status, err.response.statusText);
@@ -46,7 +45,12 @@ class ShowGallery extends React.Component {
   }
 
   renderGallery = () => {
-
+    const images = this.state.gallery.image_files;
+    if(images.length > 0){
+      return images.map(image => {
+        return <li className="image" key={ image.id }><img src={ image.url } alt={ image.name } /></li>
+      })
+    }
   }
 
   render(){
@@ -54,7 +58,7 @@ class ShowGallery extends React.Component {
       <div>
         <h1>{ this.state.gallery.title }</h1>
         <p>{ this.state.gallery.description }</p>
-        <ul>
+        <ul className="gallery">
           { this.renderGallery() }
         </ul>
       </div>

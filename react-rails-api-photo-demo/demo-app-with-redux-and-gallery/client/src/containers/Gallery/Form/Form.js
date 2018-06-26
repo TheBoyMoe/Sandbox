@@ -16,20 +16,21 @@ class GalleryForm extends Component {
     }
   };
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.match.params.id) {
-      axiosClient.get(`/api/v1/galleries/${this.props.match.params.id}`).then(response => {
-        console.log(response.data);
-        this.setState({
-          selectedGalleryImageFiles: response.data.image_files,
-          gallery: {
-            id: response.data.id,
-            title: response.data.title,
-            description: response.data.description,
-            errors: {}
-          }
+      axiosClient.get(`/galleries/${this.props.match.params.id}`)
+        .then(response => {
+          console.log(response.data);
+          this.setState({
+            selectedGalleryImageFiles: response.data.image_files,
+            gallery: {
+              id: response.data.id,
+              title: response.data.title,
+              description: response.data.description,
+              errors: {}
+            }
+          });
         });
-      });
     }
   }
 

@@ -20,7 +20,7 @@ class Auth extends React.Component {
     // TODO redirect to '/gallery'
     let authRedirect = null;
     if(this.props.isAuthenticated){
-      authRedirect = <Redirect to="/gallery/new" />;
+      authRedirect = <Redirect to="/gallery" />;
     }
 
     let output = (this.state.alreadyRegistered)?

@@ -14,6 +14,7 @@ import * as actions from './store/actions/index';
 import GalleryNew from './containers/Gallery/New/New';
 import GalleryIndex from './containers/Gallery/Index/Index';
 import GalleryEdit from './containers/Gallery/Edit/Edit';
+import GalleryShow from './containers/Gallery/Show/Show';
 
 class App extends Component {
   componentDidMount(){
@@ -33,7 +34,8 @@ class App extends Component {
     if(this.props.isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/gallery/:id/edit" component={ GalleryEdit} />
+          <Route path="/gallery/:id/edit" component={ GalleryEdit } />
+          <Route path="/gallery/:id" component={ GalleryShow } />
           <Route path="/gallery/new" component={ GalleryNew } />
           <Route path="/gallery" component={ GalleryIndex } />
           {/* <Route path="/collections" component={ Collections } /> */}

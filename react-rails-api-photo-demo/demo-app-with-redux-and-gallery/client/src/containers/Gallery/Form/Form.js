@@ -295,11 +295,12 @@ class GalleryForm extends Component {
         }
       })
       .then(response => {
-        console.log('RESPONSE: ', response);
+        // console.log('RESPONSE: ', response); // DEBUG
         this.setState({
           didFormSubmissionComplete: true
         });
-        this.props.history.push('/gallery');
+        const id = response.data.id;
+        (id)? this.props.history.push(`/gallery/${id}`) : this.props.history.push('/gallery');
       })
       .catch(error => {
         console.log('Submit Error', error);

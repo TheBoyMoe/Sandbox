@@ -28,6 +28,7 @@ class GalleryIndex extends React.Component {
       .catch(err => console.log('Error fetching galleries', err));
   }
 
+  // NOT USED
   renderGalleryList = () => {
     const galleries = this.state.galleries;
     return (
@@ -40,6 +41,7 @@ class GalleryIndex extends React.Component {
     )
   }
 
+  // NOT USED
   flattenGallery = () => {
     const galleries = this.state.galleries;
     const images = [];
@@ -52,6 +54,7 @@ class GalleryIndex extends React.Component {
     return images;
   }
 
+  // NOT USED
   randomizeGallery = () => {
     const images = this.flattenGallery();
     const temp = [];
@@ -63,10 +66,10 @@ class GalleryIndex extends React.Component {
     return temp;
   }
 
-  renderImageGallery = () => {
+  // NOT USED
+  renderRandomImageGallery = () => {
     const images = this.randomizeGallery();
     return images.map(obj => {
-
       return (<li className="image" key={ obj.image.id }>
           <a href={`/gallery/${obj.galleryId}`}>
             <img src={ obj.image.url } alt={ obj.image.name }/>
@@ -75,6 +78,22 @@ class GalleryIndex extends React.Component {
       );
     });
   }
+
+  renderImageGallery = () => {
+    const galleries = this.state.galleries;
+    const images = [];
+    galleries.forEach((gallery) => {
+      images.push({galleryId: gallery.id, image: gallery.image_files[0]})
+    })
+    return images.map(obj => {
+      return (<li className="image" key={ obj.galleryId }>
+            <a href={`/gallery/${obj.galleryId}`}>
+              <img src={ obj.image.url } alt={ obj.image.name }/>
+            </a>
+          </li>
+        );
+    })
+  };
 
   render(){
     return(

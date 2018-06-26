@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 
 import axiosClient from '../../../axiosClient';
+import './Show.css';
 
 class ShowGallery extends React.Component {
   state = {
@@ -10,7 +11,7 @@ class ShowGallery extends React.Component {
       title: '',
       description: '',
       image_files: [],
-      match: true,
+      redirect: false,
       errors: {}
     }
   }
@@ -26,7 +27,7 @@ class ShowGallery extends React.Component {
               title: res.data.title,
               description: res.data.description,
               image_files: res.data.image_files,
-              match: true,
+              redirect: false,
               errors: {}
             }
           }, () => console.log(this.state))
@@ -35,7 +36,7 @@ class ShowGallery extends React.Component {
           console.log(err.response.status, err.response.statusText);
           const gallery = {
             ...this.state.gallery,
-            match: false,
+            redirect: true,
             errors: { 
               status: err.response.status, 
               message: err.response.statusText 
@@ -58,16 +59,46 @@ class ShowGallery extends React.Component {
     }
   }
 
+  handleEdit = (id) => {
+    this.props.history.push(`/gallery/${id}/edit`);
+  }
+
+  // TODO display message when gallery deleted and user redirected
+  handleRemove = (id) => {
+    axiosClient.delete(`/galleries/${id}`);
+    const gallery = {
+      ...this.state.gallery,
+      redirect: true
+    }
+    this.setState({
+      gallery: gallery
+    }, () => console.log('STATE', this.state));
+  }
+
+  // TODO display messsage when gallery not found
   render(){
     let redirect = null;
-    if(!this.state.gallery.match)
+    if(this.state.gallery.redirect)
       redirect = <Redirect to="/gallery" />;
 
     return(
-      <div>
+      <div className="GalleryShow">
         { redirect }
         <h1>{ this.state.gallery.title }</h1>
         <p>{ this.state.gallery.description }</p>
+        <div className="buttons">
+          <button
+            onClick={() => this.handleEdit(this.state.gallery.id)}
+            className="btn btn-primary">
+            Edit
+          </button>
+          &nbsp;
+          <button
+            onClick={() => this.handleRemove(this.state.gallery.id)}
+            className="btn btn-danger">
+            Delete
+          </button>
+        </div>
         <ul className="gallery">
           { this.renderGallery() }
         </ul>

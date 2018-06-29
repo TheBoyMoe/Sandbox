@@ -19,6 +19,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.11",
+    "firebase": "^5.2.0",
     "live-server": "^1.2.0",
     "moment": "2.22.2",
     "node-sass": "4.9.0",
@@ -46,6 +47,7 @@
     "eslint-plugin-react": "^7.10.0",
     "jest": "^23.2.0",
     "raf": "^3.4.0",
-    "react-test-renderer": "^16.4.1"
+    "react-test-renderer": "^16.4.1",
+    "webpack-cli": "^3.0.8"
   }
 }

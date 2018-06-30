@@ -11,8 +11,12 @@ const config = {
 
 // firebase's set() method returns a promise
 firebase.initializeApp(config);
-firebase.database().ref().set({
-  name: 'Expensify App'
-})
-  .then(res => console.log('result:', res)) // returns undefined
-  .catch(err => console.log('Firebase Error:', err)); 
+const database = firebase.database();
+
+export { firebase, database as default };
+
+// firebase.database().ref().set({
+//   name: 'Expensify App'
+// })
+//   .then(res => console.log('result:', res)) // returns undefined
+//   .catch(err => console.log('Firebase Error:', err)); 

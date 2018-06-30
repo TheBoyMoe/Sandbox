@@ -26,12 +26,13 @@ export const startAddExpense = (expenseData = {}) => {
   return (dispatch) => {
     const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
     const expense = { description, note, amount, createdAt };
-    // write the expense data to FB
-    database.ref('expenses').push(expense)
+    // write the expense data to FB 
+    // adding return - returns a promise, enabling the action to be tested by chaining on more 'then's
+    return database.ref('expenses').push(expense)
       .then(res => {
         // update the redux store
         dispatch(addExpense({
-          id: res.id,
+          id: res.key,
           ...expense
         }));
       })

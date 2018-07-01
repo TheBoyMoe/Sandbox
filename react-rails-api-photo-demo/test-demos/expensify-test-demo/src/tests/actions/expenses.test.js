@@ -16,7 +16,6 @@ import database from '../../firebase/firebase';
 beforeEach((done) => {
   const expensesData = {};
   expenses.forEach(({ id, description, note, amount, createdAt }) => {
-    console.log(createdAt);
     expensesData[id] = { description, note, amount, createdAt };
   });
   database.ref('expenses').set(expensesData)
@@ -52,11 +51,29 @@ test('should return add expense object with provided values', () => {
   });
 });
 
-// test async action
-// check that the database is updated, and that the correct action was dispatched
+// SET_EXPENSES
+test('should return set expense action object with data', () => {
+  const action = expense.setExpenses(expenses);
+  expect(action).toEqual({
+    type: 'SET_EXPENSES',
+    expenses
+  });
+});
+
+test('should set expenses', () => {
+  const action = {
+    type: 'SET_EXPENSES',
+    expenses: [expenses[1]]
+  };
+  const state = expensesReducer(expenses, action);
+  expect(state).toEqual([expenses[1]]);
+});
+
+// TEST ASYNC ACTIONS
 // by passing in 'done', we tell jest that the function is asynchronous, 
 // and will not return until 'done()' is called - forces the test suite to wait
 test('should add expense to database and store', (done) => {
+  // check that the database is updated, and that the correct action was dispatched
   const store = createMockStore({});
   const expenseData = {
     description: 'buy milk',
@@ -115,23 +132,6 @@ test('should add expense with defaults to database and store', (done) => {
     });
 });
 
-test('should return set expense action object with data', () => {
-  const action = expense.setExpenses(expenses);
-  expect(action).toEqual({
-    type: 'SET_EXPENSES',
-    expenses
-  });
-});
-
-test('should set expenses', () => {
-  const action = {
-    type: 'SET_EXPENSES',
-    expenses: [expenses[1]]
-  };
-  const state = expensesReducer(expenses, action);
-  expect(state).toEqual([expenses[1]]);
-});
-
 test('should fetch expense from firebase', (done) => {
   const store = createMockStore({});
   store.dispatch(expense.startSetExpenses())
@@ -144,3 +144,21 @@ test('should fetch expense from firebase', (done) => {
       done();
     });
 });
+
+test('should remove expense from firebase', (done) => {
+  const store = createMockStore({});
+  const id = expenses[2].id;
+  store.dispatch(expense.startRemoveExpense({ id  }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id
+      });
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBeFalsy();
+      done();
+    });
+}); 

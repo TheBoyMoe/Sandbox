@@ -6,19 +6,6 @@ export const addExpense = (expense) => ({
   expense
 });
 
-// REMOVE_EXPENSE
-export const removeExpense = ({ id } = {}) => ({
-  type: 'REMOVE_EXPENSE',
-  id
-});
-
-// EDIT_EXPENSE
-export const editExpense = (id, updates) => ({
-  type: 'EDIT_EXPENSE',
-  id,
-  updates
-});
-
 // async actions perform an asynchronous action, e.g. write to FB, then update the store in the callback
 // async actions use redux-thunk(by default redux actions CANNOT return functions)
 // thunk passes 'dispatch' into the return function, which will be used to dispatch the call to the store
@@ -64,3 +51,27 @@ export const startSetExpenses = () => {
       });
   };
 };
+
+// REMOVE_EXPENSE - remove expense from store
+export const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+});
+
+// async action - remove expense from fb, 
+// then dispatch the action to update the store
+export const startRemoveExpense = ({ id } = {}) => {
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).remove()
+      .then(() => {
+        dispatch(removeExpense({ id }));
+      });
+  };
+};
+
+// EDIT_EXPENSE
+export const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates
+});

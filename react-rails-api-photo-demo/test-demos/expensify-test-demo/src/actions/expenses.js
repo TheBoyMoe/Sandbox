@@ -39,3 +39,28 @@ export const startAddExpense = (expenseData = {}) => {
       .catch(err => console.log('Error saving expense to FB', err.message));
   };
 };
+
+// SET_EXPENSES - update the store with an array of expenses
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses
+});
+
+// async action - fetches expenses from fb
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return database.ref('expenses').once('value')
+      .then((snapshot) => {
+        // iterate over the snapshot obj and create an array of expenses
+        const expenses = [];
+        snapshot.forEach((obj) => {
+          expenses.push({
+            id: obj.key,
+            ...obj.val()
+          });
+        });
+        // update the store
+        dispatch(setExpenses(expenses));
+      });
+  };
+};

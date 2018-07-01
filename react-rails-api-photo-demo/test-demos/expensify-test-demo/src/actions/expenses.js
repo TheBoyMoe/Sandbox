@@ -75,3 +75,15 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 });
+
+// async action - update expense on fb, then dispatch 
+// the action to update the store
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    // by returning a promise we can do 'something' after the async action completes in the test
+    return database.ref(`expenses/${id}`).update(updates)
+      .then(() => {
+        dispatch(editExpense(id, updates));
+      });
+  };
+};

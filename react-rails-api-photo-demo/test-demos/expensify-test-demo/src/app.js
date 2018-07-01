@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
+import { firebase } from './firebase/firebase';
+
 // import { setTextFilter } from './actions/filters';
 // import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
@@ -26,6 +28,11 @@ const jsx = (
     <AppRouter />
   </Provider>
 );
+
+// check authentication status
+firebase.auth().onAuthStateChanged((user) => {
+  user? console.log('User logged in') : console.log('User logged out');
+});
 
 ReactDOM.render(<p>Loading expenses from server...</p>, document.getElementById('app'));
 store.dispatch(startSetExpenses())

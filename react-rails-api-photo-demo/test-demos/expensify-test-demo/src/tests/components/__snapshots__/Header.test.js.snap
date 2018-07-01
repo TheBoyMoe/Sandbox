@@ -11,6 +11,13 @@ exports[`should render Header component 1`] = `
     exact={true}
     to="/"
   >
+    Home
+  </NavLink>
+  <NavLink
+    activeClassName="is-active"
+    aria-current="page"
+    to="/dashboard"
+  >
     Dashboard
   </NavLink>
   <NavLink
@@ -27,5 +34,8 @@ exports[`should render Header component 1`] = `
   >
     Help
   </NavLink>
+  <button>
+    Logout
+  </button>
 </header>
 `;

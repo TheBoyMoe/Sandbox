@@ -10,12 +10,13 @@ export const addExpense = (expense) => ({
 // async actions use redux-thunk(by default redux actions CANNOT return functions)
 // thunk passes 'dispatch' into the return function, which will be used to dispatch the call to the store
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
     const expense = { description, note, amount, createdAt };
     // write the expense data to FB 
     // adding return - returns a promise, enabling the action to be tested by chaining on more 'then's
-    return database.ref('expenses').push(expense)
+    return database.ref(`users/${uid}/expenses`).push(expense)
       .then(res => {
         // update the redux store
         dispatch(addExpense({
@@ -35,8 +36,9 @@ export const setExpenses = (expenses) => ({
 
 // async action - fetches expenses from fb
 export const startSetExpenses = () => {
-  return (dispatch) => {
-    return database.ref('expenses').once('value')
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/expenses`).once('value')
       .then((snapshot) => {
         // iterate over the snapshot obj and create an array of expenses
         const expenses = [];
@@ -61,8 +63,9 @@ export const removeExpense = ({ id } = {}) => ({
 // async action - remove expense from fb, 
 // then dispatch the action to update the store
 export const startRemoveExpense = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref(`expenses/${id}`).remove()
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/expenses/${id}`).remove()
       .then(() => {
         dispatch(removeExpense({ id }));
       });
@@ -79,9 +82,10 @@ export const editExpense = (id, updates) => ({
 // async action - update expense on fb, then dispatch 
 // the action to update the store
 export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     // by returning a promise we can do 'something' after the async action completes in the test
-    return database.ref(`expenses/${id}`).update(updates)
+    return database.ref(`users/${uid}/expenses/${id}`).update(updates)
       .then(() => {
         dispatch(editExpense(id, updates));
       });

@@ -8,14 +8,6 @@ exports[`should render Header component 1`] = `
   <NavLink
     activeClassName="is-active"
     aria-current="page"
-    exact={true}
-    to="/"
-  >
-    Home
-  </NavLink>
-  <NavLink
-    activeClassName="is-active"
-    aria-current="page"
     to="/dashboard"
   >
     Dashboard
@@ -26,13 +18,6 @@ exports[`should render Header component 1`] = `
     to="/create"
   >
     Create Expense
-  </NavLink>
-  <NavLink
-    activeClassName="is-active"
-    aria-current="page"
-    to="/help"
-  >
-    Help
   </NavLink>
   <button>
     Logout

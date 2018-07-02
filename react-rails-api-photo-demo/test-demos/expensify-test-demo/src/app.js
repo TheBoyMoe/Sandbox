@@ -5,6 +5,7 @@ import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
 import { firebase } from './firebase/firebase';
+import { login, logout } from './actions/auth';
 
 // import { setTextFilter } from './actions/filters';
 // import getVisibleExpenses from './selectors/expenses';
@@ -38,15 +39,19 @@ const renderApp = () => {
 // check authentication status
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
+    store.dispatch(login(user.uid));
     store.dispatch(startSetExpenses())
       .then(() => {
         renderApp();
         if(history.location.pathname === '/')
           history.push('/dashboard');
       });
+    console.log('log in'); // DEBUG  
   } else {
+    store.dispatch(logout());
     renderApp();
     history.push('/');
+    console.log('log out'); // DEBUG
   }
 });
 

@@ -7,6 +7,6 @@ export default (state = {}, action) => {
   case 'LOGOUT':
     return {};
   default:
-    state;
+    return state;
   }
 };

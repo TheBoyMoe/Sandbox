@@ -5,9 +5,12 @@
 
 # testing
 /coverage
+/src/tests/components/__snapshots__
 
 # production
 /build
+/public/scripts/*
+/public/bundle.js
 
 # misc
 .DS_Store

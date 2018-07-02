@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.0.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
@@ -18,11 +19,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest --config=jest.config.json",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1"
+    "cross-env": "^5.2.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.0.1",
+    "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.2.0",
+    "raf": "^3.4.0",
+    "react-test-renderer": "^16.4.1",
+    "redux-mock-store": "^1.5.3",
+    "webpack-cli": "^3.0.8"
   }
 }

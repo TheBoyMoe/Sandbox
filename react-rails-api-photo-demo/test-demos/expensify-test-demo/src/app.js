@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import AppRouter from './routers/AppRouter';
+import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
 import { firebase } from './firebase/firebase';
@@ -29,13 +29,25 @@ const jsx = (
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+  hasRendered = true;
+};
+
 // check authentication status
 firebase.auth().onAuthStateChanged((user) => {
-  user? console.log('User logged in') : console.log('User logged out');
+  if(user){
+    store.dispatch(startSetExpenses())
+      .then(() => {
+        renderApp();
+        if(history.location.pathname === '/')
+          history.push('/dashboard');
+      });
+  } else {
+    renderApp();
+    history.push('/');
+  }
 });
 
 ReactDOM.render(<p>Loading expenses from server...</p>, document.getElementById('app'));
-store.dispatch(startSetExpenses())
-  .then(() => {
-    ReactDOM.render(jsx, document.getElementById('app'));
-  });

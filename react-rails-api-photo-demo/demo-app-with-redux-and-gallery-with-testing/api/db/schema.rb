@@ -10,34 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_24_165212) do
-
-  create_table "galleries", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+ActiveRecord::Schema.define(version: 20_180_624_165_212) do
+  create_table 'galleries', force: :cascade do |t|
+    t.string 'title'
+    t.text 'description'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "images", force: :cascade do |t|
-    t.integer "gallery_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "file_file_name"
-    t.string "file_content_type"
-    t.integer "file_file_size"
-    t.datetime "file_updated_at"
+  create_table 'images', force: :cascade do |t|
+    t.integer 'gallery_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'file_file_name'
+    t.string 'file_content_type'
+    t.integer 'file_file_size'
+    t.datetime 'file_updated_at'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email"
-    t.string "password_digest"
-    t.string "role", default: "user"
-    t.datetime "last_login"
-    t.index ["email"], name: "index_users_on_email"
+  create_table 'users', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'email'
+    t.string 'password_digest'
+    t.string 'role', default: 'user'
+    t.datetime 'last_login'
+    t.index ['email'], name: 'index_users_on_email'
   end
-
 end

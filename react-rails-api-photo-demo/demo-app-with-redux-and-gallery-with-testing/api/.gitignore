@@ -24,3 +24,5 @@
 
 # image gallery
 /public/system/*
+
+/coverage/*

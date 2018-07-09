@@ -8,7 +8,7 @@
 # limit access to the React front end
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3000'
+    origins 'http://localhost:7000'
     resource '*',
       headers: :any,
       methods: %i(get post put patch delete options head)
